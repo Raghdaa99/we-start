@@ -1,0 +1,276 @@
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    padding: 0 15px;
+    margin: 0 auto;
+
+}
+
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+nav .logo img {
+    width: 60px;
+}
+
+nav ul {
+    margin: 0;
+    list-style: none;
+    display: flex;
+}
+
+header ul li {
+    padding: 15px;
+}
+
+header ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+}
+
+nav ul li a:hover {
+    color: #083934;
+    border-bottom: 2px solid #083934;
+}
+
+.intro {
+    /* margin: 0; */
+    background-image: url(../images/landing.jpg);
+    background-size: cover;
+    background-position: center;
+    height: calc(100vh - 53px);
+    position: relative;
+}
+
+.intro .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 320px;
+    max-width: 100%;
+}
+
+.intro .text h1 {
+    color: #1d645d;
+    font-size: 30px;
+}
+
+.intro .text p {
+    color: #333;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.about {
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: #f6f6f6;
+}
+
+.about h2 {
+    font-size: 30px;
+    color: #1d645d;
+}
+
+.about p {
+    font-size: 20px;
+    color: rgb(64, 62, 62);
+    line-height: 1.5;
+    width: 600px;
+    margin: 0 auto;
+
+}
+
+.feature {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin: 0;
+}
+
+.feature .content {
+    display: flex;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+
+.feature .content .image {
+    width: 300px;
+    height: 450px;
+    box-shadow: 0 0 10px rgb(203, 198, 198);
+    border-radius: 5px;
+
+}
+
+.feature .content .image img {
+    width: 100%;
+    object-fit: fill;
+}
+
+.feature .content .text {
+    padding: 50px 0;
+    flex-basis: calc(100% - 400px);
+}
+
+.feature .content .text p:first-of-type {
+    font-size: 20px;
+    line-height: 2em;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+hr {
+    width: 50%;
+    display: inline-block;
+    border-color: #1d645d;
+}
+
+.feature .content .text p:last-of-type {
+    line-height: 2;
+    color: #777
+}
+
+.products {
+    padding: 15px;
+    margin: 0;
+}
+
+.products .wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 50px 0;
+}
+
+.products .wrapper .card {
+    width: 32%;
+    box-shadow: 0 0 10px rgb(203, 198, 198);
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.card img {
+    width: 100%;
+}
+
+.card .content {
+    padding: 20px;
+    color: #000;
+}
+
+.card .content h2 {
+    margin-top: 0;
+}
+
+.card .content h2 a {
+    text-decoration: none;
+    color: #1d645d;
+}
+
+.card a.btn {
+    display: block;
+    background-color: #1d645d;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #1d645d;
+    transition: all .3s ease;
+}
+
+.card a.btn:hover {
+    color: #1d645d;
+    background: transparent;
+}
+
+.card .content p {
+    color: #333;
+}
+
+.contact {
+    padding: 15px;
+}
+
+.contact .content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contact .content .map {
+    width: 50%;
+    /* padding: 20px 0; */
+}
+
+.contact .content .map iframe {
+    width: 100%;
+    height: 400px;
+
+}
+
+.contact .content .contact-form {
+    padding: 0 20px;
+    width: 50%;
+}
+
+form input {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: rgb(247, 240, 240);
+    margin: 12px 0;
+    border: none;
+}
+form input:first-of-type {
+    margin-top: 0;
+}
+form input:focus , form textarea:focus{
+    outline: 2px solid #1d645d;
+}
+form textarea {
+    width: 100%;
+    display: block;
+    height: 200px;
+    background-color: rgb(247, 240, 240);
+    padding: 15px;
+    border: none;
+}
+
+form button {
+    width: 100%;
+    padding: 15px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 17px;
+    margin-top: 12px;
+    background-color: #1d645d;
+    border: 2px solid #fff;
+    cursor: pointer;
+}
+
+.footer {
+    background-color: #333;
+    width: 100%;
+    padding: 12px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+}
