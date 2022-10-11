@@ -76,7 +76,7 @@ const enableDarkMode = () => {
     localStorage.setItem("dark-mode", "enabled");
 };
 
-function disableDarkMode = () => {
+const disableDarkMode = () => {
     body.classList.remove("dark");
     darkbtn.querySelector('i').classList.add("fa-moon");
     darkbtn.querySelector('i').classList.remove("fa-sun");
@@ -109,6 +109,7 @@ function showContextMenu(show = true) {
 
 window.addEventListener("contextmenu", e => {
     e.preventDefault();
+
     showContextMenu();
     let x = e.offsetX;
     let y = e.offsetY;
