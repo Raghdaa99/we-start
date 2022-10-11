@@ -6,9 +6,29 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    background: rgb(23, 17, 121);
-    background: linear-gradient(140deg, rgba(23, 17, 121, 1) 0%, rgb(48, 112, 126) 100%);
+    font-family: Arial, Helvetica, sans-serif;
+    background: rgb(90, 89, 108);
+    background: linear-gradient(140deg, rgb(174, 173, 187) 0%, rgb(163, 182, 186) 100%);
 }
+
+body.dark {
+    background: #333;
+}
+
+img {
+    max-width: 100%;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
 
 .container {
     width: 70%;
@@ -38,7 +58,7 @@ body {
 }
 
 .products h2 {
-    color: #fff;
+    color: #000;
     font-size: 22px;
     text-align: center;
 }
@@ -56,4 +76,37 @@ body {
     border-radius: 10px;
     width: fit-content;
     margin: 5px;
+}
+
+
+.content-menu {
+    position: absolute;
+    width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    /* padding: 15px;
+    margin: 20px; */
+    box-shadow: 0 5px 10px #ececec;
+    /* visibility: hidden; */
+    display: none;
+    top: 0;
+    left: 0;
+}
+
+.content-menu .menu .item {
+    padding: 10px;
+    border-bottom: 1px solid #dfdfdf;
+    cursor: pointer;
+}
+
+.content-menu .menu .item:hover {
+    background-color: #dfdfdf;
+}
+
+.content-menu .menu .item i {
+    margin-right: 8px;
+}
+
+#dark-btn {
+    padding: 10px;
 }
