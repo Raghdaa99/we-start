@@ -1,0 +1,120 @@
+@import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap);
+
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif
+}
+
+ul {
+    list-style: none
+}
+
+
+/* img {
+    max-width: 100%
+} */
+.container {
+    width: 70%;
+    padding: 0 15px;
+    margin: 0 auto;
+
+}
+
+.search {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.search form {
+    width: 600px;
+    margin: 20px auto;
+    padding: 30px 40px;
+    background-color: #e4dcdc;
+    border-radius: 50px;
+    display: flex;
+    gap: 20px;
+}
+
+.search form input {
+    padding: 20px;
+    border-radius: 50px;
+    flex: 1;
+    caret-color: #08526d;
+    border: none;
+}
+
+.search form button {
+    padding: 20px;
+    border: none;
+    color: #FFF;
+    font-weight: bold;
+    border-radius: 50px;
+    border: none;
+    background-color: #08526d;
+    cursor: pointer;
+}
+
+.info {
+    padding: 30px 0;
+}
+
+.info .header-info {
+    display: flex;
+    gap: 50px;
+
+}
+
+.info .image {
+    width: 20%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.info .image img {
+    max-width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.info .info-user h2 {
+    font-weight: 700;
+}
+
+.info .info-user .info-following {
+    display: flex;
+    gap: 30px;
+}
+
+.info .info-user h3 {
+    margin: 0;
+    padding: 20px 0 0;
+}
+
+.info .repositries {
+    padding: 30px;
+    border: 2px solid #e4dcdc;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.info .repositries h2 {
+    margin: 0;
+}
+
+.info .repositries ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #e4dcdc ;
+}
+.info .repositries ul li a{
+    color: #333;
+}
