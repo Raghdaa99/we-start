@@ -60,35 +60,26 @@ scrollToSomeWhere(allLinks);
 // Filter Images     ---------(4)
 let fw = document.querySelectorAll('.featured-work ul li');
 let imgDiv = document.querySelectorAll('.shuffle-imgs .image');
+let shuffle_imgs = document.querySelector('.shuffle-imgs');
 
 fw.forEach(function (li) {
     li.addEventListener('click', function (event) {
-
+        shuffle_imgs.innerHTML = '';
         handelActive(event);
         let li_class_name = event.target.dataset.class;
 
         if (li_class_name === 'all') {
             imgDiv.forEach(function (img) {
                 // img.style.opacity = 1;
-                img.style.visibility = 'visible';
+                shuffle_imgs.appendChild(img);
             })
         } else {
-            index = 0;
-            minus = 0;
-            imgDiv.forEach(function (img) {
-                if (li_class_name === img.children[0].className) {
-                    // img.style.opacity = 1;
-                    img.style.visibility = 'visible';
-                    img.style.order = --minus;
-
-                    console.log(index);
-                } else {
-                    // img.style.opacity = 0.08;
-                    img.style.visibility = 'hidden';
-                    img.style.order = ++index;
-                }
-
-            })
+            // console.log(imgDiv);
+            const result = [...imgDiv].filter(img => li_class_name === img.children[0].className);
+            result.forEach(function (img) {
+                console.log(img);
+                shuffle_imgs.appendChild(img);
+            });
         }
     });
 });
@@ -193,7 +184,7 @@ function randomizeImgs() {
 randomizeImgs();
 
 let ourSkills = document.querySelector(".our-skills");
-function skillsRatio(){
+function skillsRatio() {
     let skillsOffsetTop = ourSkills.offsetTop;
     let skillsOuterHeight = ourSkills.offsetHeight;
     let windowHeight = this.innerHeight;
