@@ -111,10 +111,20 @@ window.addEventListener("contextmenu", e => {
     e.preventDefault();
 
     showContextMenu();
-    let x = e.offsetX;
-    let y = e.offsetY;
-    context_menu.style.left = `${x}px`;
-    context_menu.style.top = `${y}px`;
+    // let x = e.offsetX;
+    // let y = e.offsetY;
+
+    let y =
+    e.pageY + context_menu.offsetHeight > window.innerHeight
+      ? window.innerHeight - context_menu.offsetHeight
+      : e.pageY;
+      let x =
+    e.pageX + context_menu.offsetWidth > window.innerWidth
+      ? window.innerWidth - context_menu.offsetWidth
+      : e.pageX;
+      context_menu.style.left = `${x}px`;
+      context_menu.style.top = `${y}px`;
+    //   console.log(e.pageX, ' ',context_menu.offsetWidth );
 });
 
 window.addEventListener("click", () => {
