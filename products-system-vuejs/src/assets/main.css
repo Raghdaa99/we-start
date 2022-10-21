@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap');
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  margin: 0;
+ padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Small */
+@media (min-width: 768px) {
+  .container {
+      width: 750px;
+  }
+}
+
+/* Medium */
+@media (min-width: 992px) {
+  .container {
+      width: 970px;
+  }
+}
+
+/* Large */
+@media (min-width: 1200px) {
+  .container {
+      width: 1170px;
+  }
+}
+
+header{
+  background-color: #333;
+  padding: 10px 0 ;
+}
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  color: #fff;
+}
+header nav .logo{
+  margin-left: 20px;
+}
+header nav .logo a {
+  color: var(--main-color);
+  font-weight: bold;
+  font-size: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+nav ul{
+  display: flex;
+  margin-right: 20px;
+}
+nav ul li{
+  padding: 0 15px;
+}
+
+nav ul li a{
+  color: #fff;
+}
+
+.cart-search{
+  margin-right: 30px;
+}
+.cart-search input{
+  padding: 8px;
+border-radius: 10px;
+}
+.cart-search .shopping-cart{
+  color: #333;
+  font-size: 13px;
+  background-color: #ececec;
+  padding: 10px;
+  border-radius: 50%;
+  margin-left: 15px;
+}

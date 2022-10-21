@@ -1,0 +1,202 @@
+[
+    {
+        "name": " Product 1",
+        "price": 20,
+        "img": "https://picsum.photos/id/1/400/300",
+        "category": {
+            "id": 1,
+            "name": "Life"
+        },
+        "brands": [
+            {
+                "id": 1,
+                "name": "Nike"
+            },
+            {
+                "id": 3,
+                "name": "Gucci"
+            },
+            {
+                "id": 4,
+                "name": "Dior"
+            }
+        ],
+        "colors": [
+            "#8E44AD",
+            "#F4D03F"
+        ]
+    },
+    {
+        "name": "Product 2",
+        "price": 50,
+        "img": "https://picsum.photos/id/7/400/300",
+        "category": {
+            "id": 2,
+            "name": "Running"
+        },
+        "brands": [
+            {
+                "id": 1,
+                "name": "Nike"
+            },
+            {
+                "id": 2,
+                "name": "Adidas"
+            },
+            {
+                "id": 4,
+                "name": "Dior"
+            }
+        ],
+        "colors": [
+            "#8E44AD",
+            "#F4D03F"
+        ]
+    },
+    {
+        "name": "Product 3",
+        "img": "https://picsum.photos/id/9/400/300",
+        "price": 100,
+        "category": {
+            "id": 1,
+            "name": "Life"
+        },
+        "brands": [
+            {
+                "id": 1,
+                "name": "Nike"
+            },
+            {
+                "id": 2,
+                "name": "Adidas"
+            }
+        ],
+        "colors": [
+            "#F4D03F",
+            "#DE3163"
+        ]
+    },
+    {
+        "name": "Product 4",
+        "img": "https://picsum.photos/id/12/400/300",
+        "price": 100,
+        "category": {
+            "id": 3,
+            "name": "Baseball"
+        },
+        "brands": [
+            {
+                "id": 1,
+                "name": "Nike"
+            },
+            {
+                "id": 3,
+                "name": "Gucci"
+            }
+        ],
+        "colors": [
+            "#000000",
+            "#DE3163"
+        ]
+    },
+    {
+        "name": "Product 5",
+        "img": "https://picsum.photos/id/15/400/300",
+        "price": 70,
+        "category": {
+            "id": 3,
+            "name": "Baseball"
+        },
+        "brands": [
+            {
+                "id": 1,
+                "name": "Nike"
+            },
+            {
+                "id": 3,
+                "name": "Gucci"
+            }
+        ],
+        "colors": [
+            "#000000",
+            "#DE3163"
+        ]
+    },
+    {
+        "name": "Product 6",
+        "img": "https://picsum.photos/id/16/400/300",
+        "price": 995,
+        "category": {
+            "id": 3,
+            "name": "Baseball"
+        },
+        "brands": [
+            {
+                "id": 3,
+                "name": "Gucci"
+            },
+            {
+                "id": 4,
+                "name": "Dior"
+            }
+        ],
+        "colors": [
+            "#000000",
+            "#DE3163"
+        ]
+    },
+    {
+        "name": "Product 7",
+        "img": "https://picsum.photos/id/19/400/300",
+        "price": 200,
+        "category": {
+            "id": 4,
+            "name": "Football"
+        },
+        "brands": [
+            {
+                "id": 1,
+                "name": "Nike"
+            },
+            {
+                "id": 2,
+                "name": "Adidas"
+            },
+            {
+                "id": 5,
+                "name": "Louis Vuiton"
+            }
+        ],
+        "colors": [
+            "#000000",
+            "#DE3163"
+        ]
+    },
+    {
+        "name": "Product 8",
+        "img": "https://picsum.photos/id/22/400/300",
+        "price": 900,
+        "category": {
+            "id": 4,
+            "name": "Football"
+        },
+        "brands": [
+            {
+                "id": 1,
+                "name": "Nike"
+            },
+            {
+                "id": 4,
+                "name": "Dior"
+            },
+            {
+                "id": 5,
+                "name": "Louis Vuiton"
+            }
+        ],
+        "colors": [
+            "#000000",
+            "#DE3163"
+        ]
+    }
+]
