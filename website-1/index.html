@@ -27,30 +27,38 @@
                 <div class="logo">
                     <h2>Hireo</h2>
                 </div>
+                <i class="fas fa-bars toggle-menu"></i>
                 <div class="menu-list">
+                    <!-- <span class="close">X</span> -->
                     <ul class="menu">
                         <li><a href="#" data-section=".about">About</a></li>
                         <li><a href="#" data-section=".featured-work">Feature</a></li>
                         <li><a href="#" data-section=".our-skills">Skills</a></li>
                         <li><a href="#" data-section=".testimonials">Testimonials</a></li>
+                        <li><a href="#" data-section=".events">Events</a></li>
+                        <li><a href="#" data-section=".pricing">Pricing</a></li>
                         <li><a href="#" data-section=".contact">Contact</a></li>
                     </ul>
                 </div>
+               
             </nav>
         </div>
     </header>
     <main>
         <section class="intro">
             <div class="text">
+                <div class="content">
                 <h1>We are <span>Creative</span> Agency</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus cumque, assumenda animi quae saepe
                     voluptatum. Libero suscipit deserunt fuga similique?</p>
+                </div>
             </div>
         </section>
         <section id="about" class="about">
             <div class="container">
                 <div class="text-bout" data-aos="fade-right" data-aos-duration="2000">
                     <h2>About Us</h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique, molestias.</p>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Saepe sit nulla eveniet inventore
                         commodi
                         illum,
@@ -310,6 +318,129 @@
             </div>
         </section>
 
+        <section class="events" id="events">
+            <div class="dots dot1"></div>
+            <div class="dots dot2"></div>
+            <h2 class="main-title">Latest Events</h2>
+            <div class="container">
+                <div class="event-box">
+                    <img src="images/events.png" alt="">
+                    <div class="info">
+                        <div class="time">
+                            <div class="unit">
+                                <span class="days">20</span>
+                                <span>Days</span>
+                            </div>
+                            <div class="unit">
+                                <span class="days">10</span>
+                                <span>Hours</span>
+                            </div>
+                            <div class="unit">
+                                <span class="days">20</span>
+                                <span>Minutes</span>
+                            </div>
+                            <div class="unit">
+                                <span class="days">30</span>
+                                <span>Seconds</span>
+                            </div>
+                        </div>
+                        <h2>Tech Masters Event 2023</h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et vero tenetur doloremque iusto ut
+                            adipisci quam
+                            ratione aliquam excepturi nulla in harum, veritatis porro</p>
+                    </div>
+                </div>
+                <div class="subscribe">
+                    <form action="">
+                        <input type="email" placeholder="Enter your Email">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="pricing" id="pricing">
+            <h2 class="main-title">Pricing Plans</h2>
+            <div class="container">
+                <div class="box">
+                    <h2>Basic</h2>
+                    <img src="images/hosting-basic.png" alt="">
+                    <div class="price">
+                        <span class="price-number">$15</span>
+                        <span>Per Month</span>
+                    </div>
+                    <ul>
+                        <li>10GB HDD Space</li>
+                        <li>5 Email Addresses</li>
+                        <li>2 Subdomains</li>
+                        <li>4 Databases</li>
+                        <li>Basic Supporte</li>
+                    </ul>
+                    <a href="">Choose Plan</a>
+                </div>
+                <div class="box popular">
+                    <div class="label">Most Popular</div>
+                    <h2>Advanced</h2>
+                    <img src="images/hosting-basic.png" alt="">
+                    <div class="price">
+                        <span class="price-number">$15</span>
+                        <span>Per Month</span>
+                    </div>
+                    <ul>
+                        <li>10GB HDD Space</li>
+                        <li>5 Email Addresses</li>
+                        <li>2 Subdomains</li>
+                        <li>4 Databases</li>
+                        <li>Basic Supporte</li>
+                    </ul>
+                    <a href="">Choose Plan</a>
+                </div>
+                <div class="box">
+                    <h2>Professional</h2>
+                    <img src="images/hosting-basic.png" alt="">
+                    <div class="price">
+                        <span class="price-number">$15</span>
+                        <span>Per Month</span>
+                    </div>
+                    <ul>
+                        <li>10GB HDD Space</li>
+                        <li>5 Email Addresses</li>
+                        <li>2 Subdomains</li>
+                        <li>4 Databases</li>
+                        <li>Basic Supporte</li>
+                    </ul>
+                    <a href="">Choose Plan</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats" id="stats">
+            <h2>Our Statistics</h2>
+            <div class="container">
+                <div class="box">
+                    <i class="far fa-user"></i>
+                    <span class="num" data-num="500">0</span>
+                    <span class="text">Clients</span>
+                </div>
+                <div class="box">
+                    <i class="far fa-code"></i>
+                    <span class="num" data-num="150">0</span>
+                    <span class="text">Projects</span>
+                </div>
+                <div class="box">
+                    <i class="far fa-globe-asia"></i>
+                    <span class="num" data-num="50">0</span>
+                    <span class="text">Countries</span>
+                </div>
+                <div class="box">
+                    <i class="far fa-money-bill" ></i>
+                    <span class="num" data-num="700">0</span>
+                    <span class="text">Money</span>
+                </div>
+            </div>
+        </section>
+
         <section id="contact" class="contact">
             <h2>Contact Us</h2>
             <div class="container">
@@ -340,9 +471,10 @@
                 </div>
             </div>
         </section>
+
+
     </main>
 
-    <!-- <div class="footer">&copy; 2021 <span>Raghdaa</span> All Right Reserved</div> -->
     <div class="footer">
         <div class="container">
             <div class="box">
@@ -371,11 +503,11 @@
             </div>
             <div class="box">
                 <ul class="links">
-                    <li><a href="#">Important Link 1</a></li>
-                    <li><a href="#">Important Link 2</a></li>
-                    <li><a href="#">Important Link 3</a></li>
-                    <li><a href="#">Important Link 4</a></li>
-                    <li><a href="#">Important Link 5</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Skills</a></li>
+                    <li><a href="#">Testimonials</a></li>
+                    <li><a href="#">Contact</a></li>
                 </ul>
             </div>
             <div class="box">
@@ -396,7 +528,7 @@
                 </div>
             </div>
         </div>
-        <p class="copyright">&copy; 2021 <span>Raghdaa</span> All Right Reserved</p>
+        <p class="copyright">&copy; 2022 <span>Raghdaa</span> All Right Reserved</p>
     </div>
     <button id="btn_top"><i class="fa-solid fa-arrow-up"></i></button>
     <script src="js/script.js"></script>
