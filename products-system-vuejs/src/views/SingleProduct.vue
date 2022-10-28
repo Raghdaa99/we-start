@@ -75,20 +75,22 @@ export default {
             return brandsnames.join(', ');
         },
         addToCart() {
-            const item = {
-                product_id: this.product.id,
-                product_name: this.product.name,
-                product_img: this.product.img,
-                product_price: this.product.price,
-                quantity: this.quantity,
+            if (this.quantity >= 1) {
+                const item = {
+                    product_id: this.product.id,
+                    product_name: this.product.name,
+                    product_img: this.product.img,
+                    product_price: this.product.price,
+                    quantity: this.quantity,
+                }
+                const carts = cartStore();
+                carts.addItem(item);
+                Swal.fire({
+                    title: "Good job!",
+                    text: "Add To Cart!",
+                    icon: "success",
+                });
             }
-            const carts = cartStore();
-            carts.addItem(item);
-            Swal.fire({
-                title: "Good job!",
-                text: "Add To Cart!",
-                icon: "success",
-            });
         }
     }
 }
