@@ -1,31 +1,62 @@
 <template>
     <div class="card">
-        <a href="#"><img :src="img" alt=""></a>
+        <!-- <a href="#"><img :src="img" alt=""></a> -->
+        <router-link :to="{ name: 'singleProduct', params: { id: product.id } }">
+            <img :src="product.img" alt="">
+        </router-link>
         <div class="content">
             <div class="content-text">
-                <h2><a href="">{{ name }}
-                    </a></h2>
-                <span>{{ price}}$</span>
+                <h2>
+                    <router-link :to="{ name: 'singleProduct', params: { id: product.id } }">{{ product.name }}
+                    </router-link>
+
+                </h2>
+                <span>{{ product.price }}$</span>
             </div>
-            <span>Category : {{category }}</span>
+            <div class="category-cart">
+                <span>Category : {{ product.category.name }}</span>
+                <i @click="addToCart" class="fas fa-shopping-cart"></i>
+            </div>
             <div class="brands"> Brands :
-                {{getBrandsNames()}}
+                {{ getBrandsNames() }}
             </div>
         </div>
     </div>
+
+
+
+
 </template>
 <script>
+import cartStore from '../stores/cart.js'
 export default {
     name: 'ProductItem',
-    props: ['name', 'price', 'category', 'img', 'brands'],
+    // props: ['id','name', 'price', 'category', 'img', 'brands'],
+    props: ['product'],
     methods: {
         getBrandsNames() {
             let brandsnames = [];
-            this.brands.forEach(brand => {
+            this.product.brands.forEach(brand => {
                 brandsnames.push(brand.name);
             });
 
             return brandsnames.join(', ');
+        },
+        addToCart() {
+            const item = {
+                product_id: this.product.id,
+                product_name: this.product.name,
+                product_img: this.product.img,
+                product_price: this.product.price,
+                quantity: 1,
+            }
+            const carts = cartStore();
+            carts.addItem(item);
+            Swal.fire({
+                title: "Good job!",
+                text: "Add To Cart!",
+                icon: "success",
+            });
         }
     }
 
@@ -33,6 +64,12 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width:767px) {
+    .card {
+        width: 100%;
+    }
+}
+
 .card .content {
     padding: 8px;
     color: #000;
@@ -70,5 +107,17 @@ export default {
     margin-right: 3px;
     /* padding: 5px;
     border-radius: 8px; */
+}
+
+.category-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.category-cart i {
+    color: var(--main-color);
+    cursor: pointer;
 }
 </style>

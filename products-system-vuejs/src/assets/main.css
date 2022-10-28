@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap');
 
+:root {
+  --main-color: #f7444e;
+}
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -13,7 +17,7 @@ html {
 body {
   font-family: 'Cairo', sans-serif;
   margin: 0;
- padding: 0;
+  padding: 0;
 }
 
 a {
@@ -32,31 +36,34 @@ ul {
   margin-left: auto;
   margin-right: auto;
 }
+
 /* Small */
 @media (min-width: 768px) {
   .container {
-      width: 750px;
+    width: 750px;
   }
 }
 
 /* Medium */
 @media (min-width: 992px) {
   .container {
-      width: 970px;
+    width: 970px;
   }
 }
 
 /* Large */
 @media (min-width: 1200px) {
   .container {
-      width: 1170px;
+    width: 1170px;
   }
 }
 
-header{
+header {
   background-color: #333;
-  padding: 10px 0 ;
+  padding: 10px 0;
+  width: 100%;
 }
+
 header nav {
   display: flex;
   justify-content: space-between;
@@ -65,41 +72,79 @@ header nav {
   position: relative;
   color: #fff;
 }
-header nav .logo{
+@media (max-width:767px) {
+  header nav {
+    justify-content: center;
+  }
+}
+
+header nav .logo {
   margin-left: 20px;
 }
+
 header nav .logo a {
-  color: var(--main-color);
+  color: #fff;
   font-weight: bold;
   font-size: 26px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-nav ul{
+
+header nav .logo a span {
+  color: var(--main-color);
+}
+
+nav ul {
   display: flex;
   margin-right: 20px;
 }
-nav ul li{
+
+nav ul li {
   padding: 0 15px;
 }
 
-nav ul li a{
+nav ul li a {
   color: #fff;
 }
 
-.cart-search{
+.cart-search {
   margin-right: 30px;
 }
-.cart-search input{
+
+.cart-search input {
   padding: 8px;
-border-radius: 10px;
+  border-radius: 10px;
 }
-.cart-search .shopping-cart{
+
+.cart-search .shopping-cart {
   color: #333;
   font-size: 13px;
   background-color: #ececec;
   padding: 10px;
   border-radius: 50%;
   margin-left: 15px;
+  position: relative;
+}
+
+.count-cart {
+  position: absolute;
+  background-color: var(--main-color);
+  /* padding: 2px; */
+  top: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  border: 1px solid #fff;
+  color: #fff;
+  border-radius: 50%;
+
+}
+
+.count-cart i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

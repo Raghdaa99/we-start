@@ -69,13 +69,21 @@
     gap: 40px;
     margin-top: 50px;
 }
+
 .details-address{
     align-self: flex-start;
 }
 .form{
     width: 60%;
 }
-
+@media (max-width: 767px) {
+    .contact-form{
+        flex-direction: column;
+    }
+    .form{
+    width: 100%;
+}
+}
 form input {
     display: block;
     width: 100%;

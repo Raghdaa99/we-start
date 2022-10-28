@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "name": " Product 1",
         "price": 20,
         "img": "https://picsum.photos/id/1/400/300",
@@ -27,6 +28,7 @@
         ]
     },
     {
+        "id": 2,
         "name": "Product 2",
         "price": 50,
         "img": "https://picsum.photos/id/7/400/300",
@@ -53,7 +55,8 @@
             "#F4D03F"
         ]
     },
-    {
+    { 
+        "id": 3,
         "name": "Product 3",
         "img": "https://picsum.photos/id/9/400/300",
         "price": 100,
@@ -77,6 +80,7 @@
         ]
     },
     {
+        "id": 4,
         "name": "Product 4",
         "img": "https://picsum.photos/id/12/400/300",
         "price": 100,
@@ -100,6 +104,7 @@
         ]
     },
     {
+        "id": 5,
         "name": "Product 5",
         "img": "https://picsum.photos/id/15/400/300",
         "price": 70,
@@ -123,6 +128,7 @@
         ]
     },
     {
+        "id": 6,
         "name": "Product 6",
         "img": "https://picsum.photos/id/16/400/300",
         "price": 995,
@@ -146,6 +152,7 @@
         ]
     },
     {
+        "id": 7,
         "name": "Product 7",
         "img": "https://picsum.photos/id/19/400/300",
         "price": 200,
@@ -173,6 +180,7 @@
         ]
     },
     {
+        "id": 8,
         "name": "Product 8",
         "img": "https://picsum.photos/id/22/400/300",
         "price": 900,

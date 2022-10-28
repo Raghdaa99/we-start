@@ -53,7 +53,7 @@
 <style>
 .about .container {
   display: flex;
-  padding: 50px 0;
+  padding: 50px 20px;
   gap: 50px;
 }
 

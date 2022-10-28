@@ -1,6 +1,18 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from "vue-router";
+import cartStore from './stores/cart.js';
 
+export default{
+    data() {
+        return {
+            carts: [],
+        }
+    },
+    mounted() {
+        const cart = cartStore();
+        this.carts = cart.getItems;
+    },
+}
 </script>
 
 <template>
@@ -8,7 +20,7 @@ import { RouterLink, RouterView } from "vue-router";
     <header>
         <nav>
             <div class="logo">
-                <router-link to="/"><span>E-Commerce</span></router-link>
+                <router-link to="/"><span>E</span>-Commerce</router-link>
             </div>
             <ul class="menu">
                 <li>
@@ -27,9 +39,12 @@ import { RouterLink, RouterView } from "vue-router";
 
             <div class="cart-search">
                 <input type="text" value="" placeholder="Search...">
-                <a href="#" class="shopping-cart">
+                <router-link to="/cart" class="shopping-cart">
                     <i class="fas fa-shopping-cart"></i>
-                </a>
+                    <span class="count-cart">
+                        <i>{{ carts.length }}</i>
+                    </span>
+                </router-link>
             </div>
         </nav>
     </header>
@@ -91,14 +106,14 @@ import { RouterLink, RouterView } from "vue-router";
                 </div>
             </div>
         </div>
-        <p class="copyright">&copy; 2021 <span>Raghdaa</span> All Right Reserved</p>
+        <p class="copyright">&copy; 2022 <span>Raghdaa</span> All Right Reserved</p>
     </div>
 
 </template>
 
 <style scoped>
 .menu li a.router-link-exact-active {
-    color: #0070BF;
+    color: var(--main-color);
 }
 
 .menu li a.router-link-exact-active:hover {

@@ -30,10 +30,10 @@
                     <div class="price-desc">
                         <div class="min-max">
                             <div class="min">
-                                <label>Min</label><span id="min-value">{{min}}</span>
+                                <label>Min</label><span id="min-value">{{ min }}</span>
                             </div>
                             <div class="max">
-                                <label>Max</label><span id="max-value">{{max}}</span>
+                                <label>Max</label><span id="max-value">{{ max }}</span>
                             </div>
                         </div>
                         <div class="min-max-range">
@@ -67,9 +67,7 @@
             <div class="products-items">
                 <div class="wrapper">
 
-                    <ProductItem v-for="(product, index) in displayedProducts()" :key="index" :name="product.name"
-                        :price="product.price" :category="product.category.name" :img="product.img"
-                        :brands="product.brands"></ProductItem>
+                    <ProductItem v-for="(product, index) in displayedProducts()" :product="product"></ProductItem>
 
                 </div>
             </div>
@@ -251,14 +249,17 @@ export default {
     justify-content: start;
     background-color: #f5f7fa;
 }
-@media (max-width: 767px){
+
+@media (max-width: 767px) {
     .products {
         flex-direction: column;
-    }  
+    }
+
     .products .sidebar {
         width: 100%;
     }
 }
+
 .products-listing {
     padding: 20px 30px;
     width: 100%;
