@@ -22,6 +22,7 @@ Route::get('/',[FrontSiteController::class,'index'])->name('home');
 Route::get('/category/{slug?}',[FrontSiteController::class,'category'])->name('category');
 Route::get('/contact',[FrontSiteController::class,'contact'])->name('contact');
 Route::get('/about',[FrontSiteController::class,'about'])->name('about');
+Route::get('/search-posts',[FrontSiteController::class,'search_posts'])->name('search');
 Route::get('/details/{post_id}',[FrontSiteController::class,'details'])->name('details');
 
 

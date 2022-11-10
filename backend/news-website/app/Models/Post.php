@@ -41,4 +41,9 @@ class Post extends Model
             'draft' => 'Draft',
         ];
     }
+
+    public function incrementViewCount() {
+        $this->views++;
+        return $this->save();
+    }
 }
