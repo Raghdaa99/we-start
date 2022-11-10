@@ -102,6 +102,12 @@
                                 <p>Create Post</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.posts.trash')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Trashed Post</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item">

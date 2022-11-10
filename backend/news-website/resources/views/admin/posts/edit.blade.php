@@ -11,7 +11,8 @@
 @section('content')
     <section class="content">
         <div class="container-fluid">
-            <form action="{{route('admin.posts.store')}}" method="post" enctype="multipart/form-data">
+            <form action="{{route('admin.posts.update',$post->id)}}" method="post" enctype="multipart/form-data">
+                @method('put')
                 @csrf
                 <div class="row">
                     <div class="col-md">
@@ -29,7 +30,8 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="title">Post title</label>
-                                    <input type="text" id="title" name="title" class="form-control @error('title') is-invalid @enderror" value="{{old('title')}}">
+                                    <input type="text" id="title" name="title" value="{{ old('title', $post->title) }}"
+                                           class="form-control @error('title') is-invalid @enderror">
                                     @error('title')
                                     <p class="invalid-feedback">{{ $message }}</p>
                                     @enderror
@@ -37,20 +39,26 @@
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select id="status" name="status" class="form-control custom-select">
-                                        <option value="active" @selected(old('status') == 'active')>active</option>
-                                        <option value="draft" @selected(old('status') == 'draft')>draft</option>
+                                        <option value="active" @selected(old(
+                                        'status', $post->status) == 'active')>active</option>
+                                        <option value="draft" @selected(old(
+                                        'status' , $post->status) == 'draft')>draft</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="category_id">Category</label>
+                                    <select id="category_id" name="category_id"
+                                            class="form-control custom-select @error('category_id') is-invalid @enderror">
 
-                                    <select id="category_id" name="category_id" class="form-control custom-select @error('category_id') is-invalid @enderror">
                                         <option selected="" disabled="">Select one</option>
                                         @foreach($categories as $category)
-                                            <option @selected(old('category_id') == $category->id ) value="{{$category->id}}">
+                                            <option value="{{$category->id}}"
+                                                    @selected(old('category_id' , $post->category->id) ==
+                                            $category->id)>
                                             {{$category->title}}
                                             </option>
+
                                         @endforeach
                                     </select>
                                     @error('category_id')
@@ -59,15 +67,21 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="image">Image</label>
-                                    <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror">
+                                    <input type="file" name="image" id="image"
+                                           class="form-control @error('image') is-invalid @enderror">
                                     @error('image')
                                     <p class="invalid-feedback">{{ $message }}</p>
                                     @enderror
                                 </div>
+                                <img src="{{$post->image_url}}" width="200" height="200">
+
+                                <br>
+                                <br>
+
                                 <div class="form-group">
                                     <label for="inputDescription">Post Description</label>
                                     <textarea class="form-control" name="description" id="description">
-                                       {{old('description')}}
+                                       {{old('description',$post->description)}}
                                     </textarea>
                                 </div>
                             </div>

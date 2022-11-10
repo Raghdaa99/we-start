@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->enum('status', ['active', 'draft']);
             $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -92,12 +92,12 @@
                                 <td class="project-actions">
 
                                     <a type="button" class="btn btn-info btn-sm"
-                                       href="{{route('admin.posts.edit',$post->id)}}">
-                                        <i class="fa fa-edit"></i>
+                                       href="{{route('admin.posts.restore',$post->id)}}">
+                                        <i class="fa fa-undo"></i>
                                     </a>
                                     <button class="btn btn-danger btn-sm"
                                             onclick="deletePost('{{$post->id}}',this)">
-                                        <i class="fas fa-trash">
+                                        <i class="fas fa-times">
                                         </i>
                                         Delete
                                     </button>
@@ -144,7 +144,7 @@
         }
 
         function performDelete(id, reference) {
-            axios.delete(`/admin/posts/${id}`).then((response) => {
+            axios.get(`/admin/posts/${id}/forceDelete`).then((response) => {
                 reference.closest('tr').remove();
                 toastr.success(response.data.message);
             }).catch((error) => {

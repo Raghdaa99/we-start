@@ -1,8 +1,5 @@
 @extends('frontsite.master')
-
-
 @section('title','Home')
-
 @section('styles')
 @endsection
 
@@ -131,80 +128,104 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-lg-4">
+                                        <div class="single-bottom mb-35">
+                                            <div class="trend-bottom-img mb-30">
+                                                <img
+                                                    src="{{ asset("/assets/front/assets/img/trending/trending_bottom3.jpg") }}"
+                                                    alt="">
+                                            </div>
+                                            <div class="trend-bottom-cap">
+                                                <span class="color3">Travels</span>
+                                                <h4><a href="{{ url("details.blade.php") }}"> Welcome To The Best Model
+                                                        Winner Contest</a></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="single-bottom mb-35">
+                                            <div class="trend-bottom-img mb-30">
+                                                <img
+                                                    src="{{ asset("/assets/front/assets/img/trending/trending_bottom3.jpg") }}"
+                                                    alt="">
+                                            </div>
+                                            <div class="trend-bottom-cap">
+                                                <span class="color3">Travels</span>
+                                                <h4><a href="{{ url("details.blade.php") }}"> Welcome To The Best Model
+                                                        Winner Contest</a></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="single-bottom mb-35">
+                                            <div class="trend-bottom-img mb-30">
+                                                <img
+                                                    src="{{ asset("/assets/front/assets/img/trending/trending_bottom3.jpg") }}"
+                                                    alt="">
+                                            </div>
+                                            <div class="trend-bottom-cap">
+                                                <span class="color3">Travels</span>
+                                                <h4><a href="{{ url("details.blade.php") }}"> Welcome To The Best Model
+                                                        Winner Contest</a></h4>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Riht content -->
                         <div class="col-lg-4">
-                            <div class="trand-right-single d-flex">
-                                <div class="trand-right-img">
-                                    <img src="{{ asset("/assets/front/assets/img/trending/right1.jpg") }}" alt="">
-                                </div>
-                                <div class="trand-right-cap">
-                                    <span class="color1">Concert</span>
-                                    <h4><a href="{{ url("details.blade.php") }}">Welcome To The Best Model Winner
-                                            Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="trand-right-single d-flex">
-                                <div class="trand-right-img">
-                                    <img src="{{ asset("/assets/front/assets/img/trending/right2.jpg") }}" alt="">
-                                </div>
-                                <div class="trand-right-cap">
-                                    <span class="color3">sea beach</span>
-                                    <h4><a href="{{ url("details.blade.php") }}">Welcome To The Best Model Winner
-                                            Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="trand-right-single d-flex">
-                                <div class="trand-right-img">
-                                    <img src="{{ asset("/assets/front/assets/img/trending/right3.jpg") }}" alt="">
-                                </div>
-                                <div class="trand-right-cap">
-                                    <span class="color2">Bike Show</span>
-                                    <h4><a href="{{ url("details.blade.php") }}">Welcome To The Best Model Winner
-                                            Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="trand-right-single d-flex">
-                                <div class="trand-right-img">
-                                    <img src="{{ asset("/assets/front/assets/img/trending/right4.jpg") }}" alt="">
-                                </div>
-                                <div class="trand-right-cap">
-                                    <span class="color4">See beach</span>
-                                    <h4><a href="{{ url("details.blade.php") }}">Welcome To The Best Model Winner
-                                            Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="trand-right-single d-flex">
-                                <div class="trand-right-img">
-                                    <img src="{{ asset("/assets/front/assets/img/trending/right5.jpg") }}" alt="">
-                                </div>
-                                <div class="trand-right-cap">
-                                    <span class="color1">Skeping</span>
-                                    <h4><a href="{{ url("details.blade.php") }}">Welcome To The Best Model Winner
-                                            Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="trand-right-single d-flex">
-                                <div class="trand-right-img">
-                                    <img src="{{ asset("/assets/front/assets/img/trending/right5.jpg") }}" alt="">
-                                </div>
-                                <div class="trand-right-cap">
-                                    <span class="color1">Skeping</span>
-                                    <h4><a href="{{ url("details.blade.php") }}">Welcome To The Best Model Winner
-                                            Contest</a></h4>
-                                </div>
-                            </div>
-                            <div class="trand-right-single d-flex">
-                                <div class="trand-right-img">
-                                    <img src="{{ asset("/assets/front/assets/img/trending/right3.jpg") }}" alt="">
-                                </div>
-                                <div class="trand-right-cap">
-                                    <span class="color2">Bike Show</span>
-                                    <h4><a href="{{ url("details.blade.php") }}">Welcome To The Best Model Winner
-                                            Contest</a></h4>
-                                </div>
+                            <div class="blog_right_sidebar">
+                                <aside class="single_sidebar_widget search_widget">
+                                    <form action="" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control" placeholder='Search Keyword'
+                                                       name="search"
+                                                       onfocus="this.placeholder = ''"
+                                                       onblur="this.placeholder = 'Search Keyword'" required>
+                                                <div class="input-group-append">
+                                                    <button class="btns" type="button"><i class="ti-search"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                                type="submit">Search
+                                        </button>
+                                    </form>
+                                </aside>
+                                <aside class="single_sidebar_widget post_category_widget">
+                                    <h4 class="widget_title">Category</h4>
+                                    <ul class="list cat-list">
+                                        @foreach($categories as $category)
+                                            <li>
+                                                <a href="#" class="d-flex">
+                                                    <p>{{$category->title}}</p>
+                                                    <p>({{$category->posts_count}})</p>
+                                                </a>
+                                            </li>
+                                        @endforeach
+
+                                    </ul>
+                                </aside>
+                                <aside class="single_sidebar_widget popular_post_widget">
+                                    <h3 class="widget_title">Recent Post</h3>
+                                    @foreach($recent_posts as $recent_post)
+                                        <div class="media post_item">
+                                            <img src="{{ $recent_post->image_url }}"
+                                                 alt="post" width="80" height="80">
+                                            <div class="media-body">
+                                                <a href="{{ url("single-blog.html") }}">
+                                                    <h3>{{ $recent_post->title }}</h3>
+                                                </a>
+                                                <p>{{$recent_post->updated_at->diffForHumans()}}</p>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                </aside>
                             </div>
                         </div>
 
@@ -372,5 +393,5 @@
     </main>
 @endsection
 
-@section('scripts')
-@endsection
+{{--@section('scripts')--}}
+{{--@endsection--}}

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->enum('status', ['active', 'draft']);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

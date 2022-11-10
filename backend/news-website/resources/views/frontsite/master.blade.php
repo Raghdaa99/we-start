@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="{{ asset("/assets/front/assets/css/slick.css") }}">
     <link rel="stylesheet" href="{{ asset("/assets/front/assets/css/nice-select.css") }}">
     <link rel="stylesheet" href="{{ asset("/assets/front/assets/css/style.css") }}">
+
+    @yield('styles')
 </head>
 
 <body>
@@ -272,5 +274,6 @@
 <script src="{{ asset("/assets/front/assets/js/plugins.js") }}"></script>
 <script src="{{ asset("/assets/front/assets/js/main.js") }}"></script>
 
+@yield('scripts')
 </body>
 </html>
