@@ -95,7 +95,7 @@ class InvoiceController extends Controller
      */
     public function edit(Invoice $invoice)
     {
-        //
+        return view('admin.invoices.edit', ['invoice' => $invoice]);
     }
 
     /**
@@ -103,11 +103,41 @@ class InvoiceController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param \App\Models\Invoice $invoice
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Invoice $invoice)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'user_name' => 'required|string',
+            'user_email' => 'required|email',
+            'user_mobile' => 'required|string|min:7|max:10',
+        ]);
+        if (!$validator->fails()) {
+            $invoice->update([
+                'user_name' => $request->user_name,
+                'user_email' => $request->user_email,
+                'user_mobile' => $request->user_mobile,
+            ]);
+            $invoice->invoice_details()->delete();
+
+            $details_invoice = [];
+            for ($i = 0; $i < count($request->item_name); $i++) {
+                $details_invoice[$i]['item_name'] = $request->item_name[$i];
+                $details_invoice[$i]['item_price'] = $request->item_price[$i];
+                $details_invoice[$i]['quantity'] = $request->quantity[$i];
+                $details_invoice[$i]['sub_total_price'] = $request->quantity[$i] * $request->item_price[$i];
+            }
+            $isSaved = $invoice->invoice_details()->createMany($details_invoice);
+
+            return response()->json(
+                [
+                    'message' => $isSaved ? 'Invoice Updated successfully' : 'Updated failed!'
+                ],
+                $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST,
+            );
+        } else {
+            return response()->json(['message' => $validator->getMessageBag()->first()], Response::HTTP_BAD_REQUEST);
+        }
     }
 
     /**

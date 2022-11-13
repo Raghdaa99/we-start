@@ -45,33 +45,27 @@
                                     <div class="form-group">
                                         <label for="title">Invoice Number</label>
                                         <input type="text" id="invoice_number" name="invoice_number" disabled
-                                               class="form-control @error('user_name') is-invalid @enderror"
+                                               class="form-control "
                                                value="{{old('invoice_number',$invoice->invoice_number)}}">
-                                        @error('invoice_number')
-                                        <p class="invalid-feedback">{{ $message }}</p>
-                                        @enderror
+                                       
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="title">User name</label>
                                         <input type="text" id="user_name" name="user_name" disabled
-                                               class="form-control @error('user_name') is-invalid @enderror"
+                                               class="form-control "
                                                value="{{old('user_name',$invoice->user_name)}}">
-                                        @error('user_name')
-                                        <p class="invalid-feedback">{{ $message }}</p>
-                                        @enderror
+                                       
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="title">User Phone</label>
                                         <input type="text" id="user_mobile" name="user_mobile" disabled
-                                               class="form-control @error('user_mobile') is-invalid @enderror"
+                                               class="form-control"
                                                value="{{old('user_mobile',$invoice->user_mobile)}}">
-                                        @error('user_mobile')
-                                        <p class="invalid-feedback">{{ $message }}</p>
-                                        @enderror
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -81,22 +75,18 @@
                                     <div class="form-group">
                                         <label for="title">User Email</label>
                                         <input type="email" id="user_email" name="user_email" disabled
-                                               class="form-control @error('user_email') is-invalid @enderror"
+                                               class="form-control"
                                                value="{{old('user_email',$invoice->user_email)}}">
-                                        @error('user_email')
-                                        <p class="invalid-feedback">{{ $message }}</p>
-                                        @enderror
+                                       
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="title">Invoice Date</label>
                                         <input type="text" id="user_name" name="user_name" disabled
-                                               class="form-control @error('user_name') is-invalid @enderror"
+                                               class="form-control "
                                                value="{{old('user_name',$invoice->created_at)}}">
-                                        @error('user_name')
-                                        <p class="invalid-feedback">{{ $message }}</p>
-                                        @enderror
+                                       
                                     </div>
 
                                 </div>
@@ -105,22 +95,17 @@
                                     <div class="form-group">
                                         <label for="title">Total Price</label>
                                         <input type="text" id="user_mobile" name="user_mobile" disabled
-                                               class="form-control @error('user_mobile') is-invalid @enderror"
+                                               class="form-control"
                                                value="{{old('user_mobile',$invoice->invoice_details()->sum('sub_total_price'))}}$">
-                                        @error('user_mobile')
-                                        <p class="invalid-feedback">{{ $message }}</p>
-                                        @enderror
+                                       
                                     </div>
                                 </div>
 
 
                             </div>
 
-
-                        </div>
-
-                        <!-- /.card-body -->
-                        <div class="table-responsive">
+ <!-- /.card-body -->
+ <div class="table-responsive">
                             <h3>Items</h3>
                             <table class="invoice_details_table">
                                 <thead>
@@ -160,6 +145,9 @@
 
                             </table>
                         </div>
+                        </div>
+
+                       
                     </div>
                     <!-- /.card -->
                 </div>
