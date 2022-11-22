@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -155,7 +156,8 @@ class PostController extends Controller
     public function forceDelete(Post $post)
     {
         $isDeleted = $post->forceDelete();
-        unlink(public_path('storage/' . $post->image));
+        // unlink(public_path('storage/' . $post->image));
+        File::delete(public_path('storage/'.$post->image));
         return response()->json(
             ['message' => $isDeleted ? 'Post in trash , you can restore ' : 'Delete failed!'],
             $isDeleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
