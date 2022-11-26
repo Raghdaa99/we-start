@@ -1,6 +1,6 @@
 <template>
   <div class="item">
-    <img :src="survey.image" alt="">
+    <img :src="survey.image" alt="" height="250" style="width: 100%" >
     <div class="content-text">
       <h4>{{survey.title}}</h4>
       <p>{{survey.description}}</p>

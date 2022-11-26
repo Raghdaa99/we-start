@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\Response;
 
 class SurveyController extends Controller
 {
@@ -125,11 +126,23 @@ class SurveyController extends Controller
      *
      * @param Survey $survey
      * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Survey $survey, Request $request)
     {
-        //
+        $user = $request->user();
+        if ($user->id != $survey->user_id) {
+            return abort(403, 'Unauthorized');
+        }
+        $isDeleted = $survey->delete();
+        if ($survey->image){
+            Storage::disk('public')->delete($survey->image);
+        }
+
+        return response()->json(
+            ['message' => $isDeleted ? 'Success Deleted ' : 'Delete failed!'],
+            $isDeleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
+        );
     }
 
     protected function upload(UploadedFile $file)

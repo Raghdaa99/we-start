@@ -11,7 +11,9 @@
         </template>
         <div class="surveys-List">
 
-            <SurveyListItem v-for="(survey, index) in surveys" :key="survey.id" :survey="survey">
+            <SurveyListItem v-for="(survey, index) in surveys" :key="survey.id" :survey="survey"
+                            @delete="deleteSurvey"
+            >
             </SurveyListItem>
 
 
@@ -24,7 +26,7 @@ import PageComponent from "../components/PageComponent.vue";
 import SurveyListItem from "../components/SurveyListItem.vue";
 // import { useUserStore } from "../stores";
 // import { computed } from "@vue/reactivity";
-import { ref, onMounted } from "vue";
+import {ref, onMounted} from "vue";
 import axiosClient from "../axios";
 
 
@@ -36,6 +38,15 @@ const surveys = ref('');
 
 //   }
 // }
+
+const deleteSurvey = (survey_id) => {
+    axiosClient.delete('/survey/'+survey_id).then(function (response) {
+        console.log(response)
+        getSurveys();
+    }).catch(function (error) {
+        console.log(error)
+    });
+}
 const getSurveys = () => {
     axiosClient.get("survey")
         .then((res) => {
