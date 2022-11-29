@@ -95,6 +95,14 @@ class SurveyController extends Controller
         }
 
         // update Questions ----------------->>>>>>>>>>>>>>>>>>>>>..
+        $this->updateAllQuestionBySurvey($survey, $data);
+
+        return new SurveyResource($survey);
+    }
+
+    private function updateAllQuestionBySurvey($survey, $data)
+    {
+
         $currentIds = $survey->questions()->pluck('id')->toArray();
 
         $questions = json_decode($data['questions']);
@@ -120,9 +128,7 @@ class SurveyController extends Controller
 //                dump($idQuestion .'   NO');
             }
         }
-        return new SurveyResource($survey);
     }
-
 
     private function createQuestion($data)
     {
