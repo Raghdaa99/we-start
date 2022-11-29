@@ -24,9 +24,9 @@ class SurveyResource extends JsonResource
             'status' => (bool)$this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'expire_date' => Carbon::createFromFormat('Y-m-d H:i:s', $this->expire_date)->format('Y-m-d'),
 //            'expire_date' => Carbon::createFromFormat('Y-m-d H:i:s', $this->expire_date)->format('Y-m-d'),
-            'questions' => $this->questions,
+            'expire_date' => (new \DateTime($this->expire_date))->format('Y-m-d'),
+            'questions' => SurveyQuestionResource::collection($this->questions),
         ];
     }
 }

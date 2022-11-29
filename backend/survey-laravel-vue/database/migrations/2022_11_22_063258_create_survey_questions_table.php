@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->text('description')->nullable();
             $table->string('type');
             $table->string('question');
-            $table->text('data')->nullable();
+            $table->text('options')->nullable();
             $table->timestamps();
         });
     }

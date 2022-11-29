@@ -8,6 +8,7 @@ use App\Models\Survey;
 use App\Models\SurveyQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -41,6 +42,7 @@ class SurveyController extends Controller
         }
 
         $survey = Survey::create($data);
+
 
         $questions = json_decode($data['questions']);
         foreach ($questions as $question) {
@@ -88,20 +90,66 @@ class SurveyController extends Controller
         }
         $old_image = $survey->image;
         $survey->update($data);
-//
         if ($old_image != $survey->image) {
             Storage::disk('public')->delete($old_image);
         }
 
-        // update Questions ----------------->>>>>>>>>>>>>>>
+        // update Questions ----------------->>>>>>>>>>>>>>>>>>>>>..
+        $currentIds = $survey->questions()->pluck('id')->toArray();
 
+        $questions = json_decode($data['questions']);
 
+        $newIds = Arr::pluck($questions, 'id');
+
+//        dd($newIds);
+        $IDsToDelete = array_diff($currentIds, $newIds);  // حذف الاسئلة الغير الموجودة
+        SurveyQuestion::destroy($IDsToDelete);
+
+        foreach ($questions as $question) {
+            $questionArr = (array)$question;
+            $questionArr['survey_id'] = $survey->id;
+            $idQuestion = $questionArr['id'];
+            if (in_array($idQuestion, $currentIds) && in_array($idQuestion, $newIds)) {
+                // اذا كان اي دي السؤال موجود سوف يتم التعديل
+//                dump('update');
+                $this->updateQuestion($questionArr);
+//                dump($idQuestion .'   yes');
+            } else {  // غير موجود سوف يتم اضافة السؤال
+                $this->createQuestion($questionArr);
+//                dump('added');
+//                dump($idQuestion .'   NO');
+            }
+        }
         return new SurveyResource($survey);
     }
 
 
     private function createQuestion($data)
     {
+        return SurveyQuestion::create($this->rules($data));
+
+    }
+
+    private function updateQuestion($data)
+    {
+//        dd($data);
+        $surveyQuestionID = $data['id'];
+        $data = $this->rules($data);
+        $surveyQuestion = SurveyQuestion::findOrFail($surveyQuestionID);
+        $surveyQuestion->update([
+            'type' => $data['type'],
+            'question' => $data['question'],
+            'description' => $data['description'],
+            'options' => $data['options'],
+            'survey_id' => $data['survey_id']
+        ]);
+//        dump($surveyQuestion);
+        return $surveyQuestion;
+    }
+
+    private function rules($data)
+    {
+        $data['options'] = json_encode($data['options']);
         $validator = Validator::make($data, [
             'question' => 'required|string',
             'type' => ['required', Rule::in([
@@ -112,12 +160,11 @@ class SurveyController extends Controller
                 Survey::TYPE_CHECKBOX,
             ])],
             'description' => 'nullable|string',
-            'data' => 'present',
-            'survey_id' => 'exists:App\Models\Survey,id'
+            'data' => 'nullable',
+            'survey_id' => 'exists:surveys,id',
+            'options' => 'nullable|string'
         ]);
-
-        return SurveyQuestion::create($validator->validated());
-
+        return $validator->validated();
     }
 
 
@@ -135,7 +182,7 @@ class SurveyController extends Controller
             return abort(403, 'Unauthorized');
         }
         $isDeleted = $survey->delete();
-        if ($survey->image){
+        if ($survey->image) {
             Storage::disk('public')->delete($survey->image);
         }
 

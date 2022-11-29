@@ -49,23 +49,23 @@
                     Add Options
                 </button>
             </div>
+            <!--            {{JSON.parse(modelQuestion.options)}}-->
             <OptionEditor v-for="(option, index) in modelQuestion.options" :key="option.uuid"
                           :option="option"
                           :index="index"
-                          @removeOption="removeOption"
-            >
-
+                          @removeOption="removeOption">
             </OptionEditor>
 
-                  <div v-if="!modelQuestion.options.length">
-                    you dont have any option defined
-                  </div>
+            <div v-if="!modelQuestion.options.length">
+                you dont have any option defined
+            </div>
             <!--      <div v-for="(option, index) in modelQuestion.data.options" :key="option.uuid" class="d-flex justify-content-between">-->
             <!--        <span>{{ index + 1 }}.</span>-->
             <!--        <input type="text" v-model="option.text" @change="dataChange" class="form-control">-->
             <!--        <button class="btn btn-outline-danger" type="button" @click="removeOption(option)"><i class="fas fa-trash"></i></button>-->
             <!--      </div>-->
         </div>
+
 
     </div>
 </template>
@@ -86,6 +86,7 @@ const props = defineProps({
 const emit = defineEmits(["change", "addQuestion", "deleteQuestion"]);
 
 const modelQuestion = ref(props.question);
+
 // const modelQuestion = ref(JSON.parse(JSON.stringify(props.question)));
 
 const questionTypes = computed(() => store.getQuestionTypes);
@@ -99,6 +100,7 @@ function addOption() {
     let newOption = {uuid: uuidv4(), text: ""}
     modelQuestion.value.options.push(newOption);
 }
+
 function removeOption(option) {
 
     modelQuestion.value.options = modelQuestion.value.options.filter((op) => op.uuid !== option.uuid);
@@ -111,6 +113,11 @@ function addQuestion() {
 function deleteQuestion() {
     emit("deleteQuestion", props.question);
 }
+
+function typeChange() {
+    emit('change', props.question);
+}
+
 </script>
 
 

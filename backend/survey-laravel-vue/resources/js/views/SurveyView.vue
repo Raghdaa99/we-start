@@ -65,7 +65,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <button type="submit" class="btn btn-primary"> Create new Survey</button>
+                                <button type="submit" class="btn btn-primary">{{route.params.id ? 'Update' : 'Create new'}} Survey</button>
                             </div>
                         </div>
                         <!-- /.card-body -->
@@ -92,7 +92,7 @@ const router = useRouter();
 
 
 let model = ref({
-    title: "ddds",
+    title: "",
     status: false,
     description: null,
     image: '',
@@ -107,8 +107,6 @@ if (route.params.id) {
         model.value.image_url = response.data.data.image;
         model.value.expire_date = response.data.data.expire_date;
         model.value.questions = response.data.data.questions;
-        console.log(response.data.data.questions)
-        console.log(response.data.data.image)
     }).catch(function () {
 
     });
@@ -148,12 +146,15 @@ function addQuestion(index) {
 }
 
 function questionChange(question) {
-    model.value.questions = model.value.questions.map((q) => {
-        if (q.id === question.id) {
-            return JSON.parse(JSON.stringify(question));
-        }
-        return q;
-    });
+    // model.value.questions = model.value.questions.map((q) => {
+    //     if (q.id === question.id) {
+    //         return JSON.parse(JSON.stringify(question));
+    //     }0.0
+    //     return00 q;
+    // });
+
+    // console.log(model.value.questions)
+
 }
 
 function deleteQuestion(question) {
