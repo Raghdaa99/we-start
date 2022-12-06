@@ -1,42 +1,5 @@
 @push('scripts')
-    <script>
-        function edit_category(id) {
-            let url = '{{ route("admin.categories.index") }}/' + id;
-            $.get({
-                url,
-                success: (res) => {
-                    $('#editModal form').attr('action', url)
-                    $('#editModal input[name=en_name]').val(res.en_name)
-                    $('#editModal input[name=ar_name]').val(res.ar_name)
-                    $('#editModal img').attr('src', '/' + res.image.path)
-                    $('#editModal select').val(res.parent_id)
-                }
-            })
-        }
 
-        $('#edit_form').on('submit', function (e) {
-            e.preventDefault();
-
-            var data = new FormData(this);
-            let url = $('#editModal form').attr('action');
-            $.ajax({
-                type: 'post',
-                url,
-                data,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: (res) => {
-                    console.log(res);
-                    // $('#row_'+res.id+' td:nth-child(2)').text(res.trans_name);
-                    // $('#row_'+res.id+' td:nth-child(3) img').attr('src', '/'+res.image.path)
-                    // $('#row_'+res.id+' td:nth-child(4)').text(res.parent.trans_name);
-
-                    // $('#editModal').modal('hide')
-                }
-            })
-        })
-    </script>
 @endpush
 @extends('admin.layouts.master')
 
@@ -86,35 +49,10 @@
                     </thead>
 
                     <tbody>
-                    {{--                            @forelse ($categories as $category)--}}
-                    {{--                                <tr id="row_{{ $category->id }}">--}}
-                    {{--                                    <td>{{ $loop->iteration }}</td>--}}
-                    {{--                                    <td>{{ $category->trans_name }}</td>--}}
-                    {{--                                    <td><img width="70" src="{{ asset($category->image->path??'') }}" alt="">--}}
-                    {{--                                    </td>--}}
-                    {{--                                    <td>{{ $category->parent->trans_name }}</td>--}}
-                    {{--                                    <td>{{ $category->created_at->format('F m, Y') }}</td>--}}
-                    {{--                                    <td>--}}
-                    {{--                                        <a onclick="edit_category({{ $category->id }})" data-id="{{ $category->id }}" data-toggle="modal" data-target="#editModal"--}}
-                    {{--                                           class="btn btn-primary btn-sm btn-edit"><i class="fas fa-edit"></i></a>--}}
-                    {{--                                        <form class="d-inline"--}}
-                    {{--                                              action="{{ route('admin.categories.destroy', $category->id) }}"--}}
-                    {{--                                              method="post">--}}
-                    {{--                                            @csrf--}}
-                    {{--                                            @method('delete')--}}
-                    {{--                                            <button onclick="return confirm('Are you sure?!')"--}}
-                    {{--                                                    class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>--}}
-                    {{--                                        </form>--}}
-                    {{--                                    </td>--}}
-                    {{--                                </tr>--}}
-                    {{--                            @empty--}}
-                    {{--                                <tr>--}}
-                    {{--                                    <td colspan="5">No Data</td>--}}
-                    {{--                                </tr>--}}
-                    {{--                            @endforelse--}}
+
                     </tbody>
                 </table>
-                {{--                        {{ $categories->links() }}--}}
+
             </div>
         </div>
     </div>
@@ -160,9 +98,7 @@
                             <label>Parent</label>
                             <select name="parent_id" class="form-control custom-select">
                                 <option value="">-- Select --</option>
-                                {{--                                @foreach ($categories as $category)--}}
-                                {{--                                    <option value="{{ $category->id }}">{{ $category->trans_name }}</option>--}}
-                                {{--                                @endforeach--}}
+                              
                             </select>
                         </div>
 
