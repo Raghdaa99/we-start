@@ -40,8 +40,8 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="products" class="collapse" data-parent="#sidebarnav">
-                            <li><a href="{{ url("") }}">{{ __('admin.All Products') }}</a></li>
-                            <li><a href="{{ url("") }}">{{ __('admin.Add New') }}</a></li>
+                            <li><a href="{{ route('admin.products.index')  }}">{{ __('admin.All Products') }}</a></li>
+                            <li><a href="{{ route('admin.products.create') }}">{{ __('admin.Add New') }}</a></li>
                         </ul>
                     </li>
                     <li>
@@ -52,8 +52,8 @@
                             <div class="clearfix"></div>
                         </a>
                         <ul id="coupons" class="collapse" data-parent="#sidebarnav">
-                            <li><a href="{{ url("") }}">{{ __('admin.All Coupons') }}</a></li>
-                            <li><a href="{{ url("") }}">{{ __('admin.Add New') }}</a></li>
+                            <li><a href="{{ route('admin.coupons.index') }}">{{ __('admin.All Coupons') }}</a></li>
+                            <li><a href="{{ route('admin.coupons.create') }}">{{ __('admin.Add New') }}</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

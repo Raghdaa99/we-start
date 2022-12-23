@@ -1,4 +1,4 @@
-<?php
+
 @if ($errors->any())
     <div class="alert alert-danger alert-dismissable fade show">
         <ul>
@@ -8,3 +8,4 @@
         </ul>
     </div>
 @endif
+

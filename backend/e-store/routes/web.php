@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -38,7 +39,8 @@ Route::group(
         });
         Route::resource('categories', CategoryController::class);
         Route::resource('products', ProductController::class);
-
+        Route::resource('coupons', CouponController::class);
+        Route::post('add-new-image', [ProductController::class, 'add_image'])->name('add_image');
 
     });
 

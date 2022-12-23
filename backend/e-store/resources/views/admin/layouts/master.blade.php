@@ -44,9 +44,7 @@
             <!--=================================
  footer -->     @include('admin.layouts.footer')
 
-
         </div><!-- main content wrapper end-->
-
     </div>
 
 

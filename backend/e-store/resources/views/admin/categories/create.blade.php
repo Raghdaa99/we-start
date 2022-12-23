@@ -63,9 +63,9 @@
                                         <label>Parent</label>
                                         <select name="parent_id" class="form-control custom-select">
                                             <option value="">-- Select --</option>
-                                            {{--                                    @foreach ($categories as $category)--}}
-                                            {{--                                    <option value="{{ $category->id }}">{{ $category->trans_name }}</option>--}}
-                                            {{--                                    @endforeach--}}
+                                            @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->trans_name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
