@@ -67,5 +67,17 @@ class Product extends Model
             $value->slug = $slug;
         });
     }
+    public function getFinalPriceAttribute()
+    {
+        $coupon = $this->coupons;
+        if($coupon) {
+            if($coupon->type == 'value') {
+                return $this->price - $coupon->value;
+            }else {
+                return $this->price - (($coupon->value / 100) * $this->price);
+            }
+        }
+        return $this->price;
+    }
 }
 

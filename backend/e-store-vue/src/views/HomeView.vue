@@ -8,7 +8,7 @@ onMounted(e => {
 const getHomeCategories = () => {
     axios.get('/categories')
     .then(res => {
-        console.log( res.data.data);
+        console.log();
         categories.value = res.data.data;
     })
 }
@@ -16,7 +16,7 @@ const getHomeCategories = () => {
  
 <template>
    <!-- banner -->
-   <div class="bg-cover bg-no-repeat bg-center py-36" style="background-image: url('src/assets/images/banner-bg.jpg');">
+   <div class="bg-cover bg-no-repeat bg-center py-36" style="background-image: url('src/assets/images/banner-bg.jpg')">
         <div class="container">
             <h1 class="text-6xl text-gray-800 font-medium mb-4 capitalize">
                 best collection for <br> home decoration

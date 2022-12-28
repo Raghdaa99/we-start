@@ -32,6 +32,11 @@ const router = createRouter({
       meta: {requiresAuth: true},
     },
     {
+      path: '/product/:slug',
+      name: 'product',
+      component: () => import('../views/ProductView.vue')
+    },
+    {
       path: "/login",
       name: "Login",
       component: () => import('../views/loginView.vue'),
@@ -44,7 +49,7 @@ const router = createRouter({
       meta: {isGuest: true},
     },
 
-    { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../views/AboutView.vue') },
+    { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../views/NotFound.vue') },
   ]
 })
 

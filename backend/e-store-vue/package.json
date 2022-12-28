@@ -16,6 +16,7 @@
     "pinia-plugin-persistedstate": "^3.0.1",
     "toastr": "^2.1.4",
     "vue": "^3.2.37",
+    "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.2"
   },
   "devDependencies": {

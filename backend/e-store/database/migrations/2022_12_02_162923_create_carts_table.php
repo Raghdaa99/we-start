@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->uuid('cookie_id');
+            $table->foreignId('user_id')->nullable();
             $table->foreignId('product_id');
             $table->foreignId('product_variation_id');
             $table->foreignId('coupon_id');

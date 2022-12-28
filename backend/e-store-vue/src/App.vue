@@ -21,7 +21,7 @@ const logout = () => {
     <header class="py-4 shadow-sm bg-white">
         <div class="container flex items-center justify-between">
             <RouterLink to="/">
-                <img src="src/assets/images/logo.svg" alt="Logo" class="w-32" />
+                <img src="/src/assets/images/logo.svg" alt="Logo" class="w-32" />
             </RouterLink>
 
             <div class="w-full max-w-xl relative flex">
@@ -45,7 +45,7 @@ const logout = () => {
                         class="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                         8</div>
                 </a>
-                <a href="#" class="text-center text-gray-700 hover:text-primary transition relative">
+                <RouterLink :to="'/cart'" class="text-center text-gray-700 hover:text-primary transition relative">
                     <div class="text-2xl">
                         <i class="fa-solid fa-bag-shopping"></i>
                     </div>
@@ -53,7 +53,7 @@ const logout = () => {
                     <div
                         class="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                         2</div>
-                </a>
+                </RouterLink>
                 <a href="#" class="text-center text-gray-700 hover:text-primary transition relative">
                     <div class="text-2xl">
                         <i class="fa-regular fa-user"></i>

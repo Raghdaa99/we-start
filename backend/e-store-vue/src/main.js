@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { createI18n } from 'vue-i18n'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import { useStore } from './stores/user';
 import App from './App.vue'

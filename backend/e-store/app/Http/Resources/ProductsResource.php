@@ -14,6 +14,32 @@ class ProductsResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->trans_name,
+            'slug' => $this->slug,
+            'short' => $this->trans_smalldesc,
+            'desc' => $this->trans_desc,
+            'price' => $this->price,
+            'final_price' => $this->final_price,
+            'quantity' => $this->quantity,
+            'featured' => $this->featured,
+            'category_id' => $this->category_id,
+            'category' => [
+                'name' => $this->category->trans_name,
+                'slug' => $this->category->slug,
+            ],
+            'image' => url($this->image->path),
+            'gallery' => GalleryResource::collection($this->gallery),
+            'variations' => [
+                'colors' => $this->variations()->where('type', 'colors')->select('id', 'value', 'extraprice')->get(),
+                'sizes' => $this->variations()->where('type', 'sizes')->select('id', 'value', 'extraprice')->get(),
+            ],
+            'coupons' => $this->coupons,
+            'reviews' => [
+                'count' => $this->reviews->count(),
+                'rate' => round($this->reviews->avg('star'), 2)
+            ]
+        ];
     }
 }

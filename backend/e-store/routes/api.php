@@ -27,6 +27,8 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::get('/categories' , [SiteController::class,'getAllCategories']);
+    Route::get('/products' , [SiteController::class,'getAllProducts']);
+    Route::get('/product/{slug}', [SiteController::class,'getProduct']);
 
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login ', [AuthController::class, 'login']);
