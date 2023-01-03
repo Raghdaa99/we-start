@@ -44,7 +44,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-//dd('ddddd');
+
         if ($request->hasFile('image')) {
             $image = $this->upload($request->file('image'));
         }
@@ -91,7 +91,7 @@ class CategoryController extends Controller
      * @return Category
      */
     public function update(CategoryRequest $request, Category $category)
-    {
+    {dd($request->all());
 
         $category->update([
             'name' => '',
