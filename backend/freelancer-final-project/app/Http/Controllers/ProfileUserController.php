@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
-class FreelancerController extends Controller
+class ProfileUserController extends Controller
 {
     public function index()
     {
@@ -18,7 +18,7 @@ class FreelancerController extends Controller
         $user = Auth::user();
         return view('frontsite.dashboard-user.settings', [
             'user' => $user,
-            'profile' => $user->freelancer,
+            'profile' => $user->profile,
         ]);
     }
 
@@ -42,7 +42,7 @@ class FreelancerController extends Controller
                 'disk' => 'public'
             ]);
 
-        
+
 
             $user->image()->create([
                 'path' => $filepath,
@@ -50,7 +50,7 @@ class FreelancerController extends Controller
             ]);
         }
 
-        $isUpdate = $user->freelancer()->updateOrCreate([], $request->all());
+        $isUpdate = $user->profile()->updateOrCreate([], $request->all());
 
         $user->forceFill([
             'name' => $request->first_name . ' ' . $request->last_name,
