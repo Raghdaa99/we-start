@@ -61,8 +61,13 @@
                             <!-- Buttons -->
                             <div class="buttons-to-right always-visible">
                                 <a href="dashboard-manage-bidders.html" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> Manage Bidders <span class="button-info">3</span></a>
-                                <a href="#" class="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
-                                <a href="#" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top"><i class="icon-feather-trash-2"></i></a>
+                                <a href="{{route('user.projects.edit',$project)}}" class="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
+                                <a  onclick="projectDelete('{{$project->id}}',this)" class="button gray ripple-effect ico" data-tippy-placement="top" data-tippy="" data-original-title="Remove">
+                                    <i class="icon-feather-trash-2"></i>
+                                </a>
+{{--                                <button  class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top">--}}
+{{--                                    <i class="icon-feather-trash-2"></i>--}}
+{{--                                </button>--}}
                             </div>
                         </li>
                         @empty
@@ -76,4 +81,48 @@
 
     </div>
     <!-- Row / End -->
+@endsection
+
+@section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        function projectDelete(id, reference) {
+            Swal.fire({
+                title: 'Are you sure?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    performDelete(id, reference)
+                }
+            })
+        }
+
+        function performDelete(id, reference) {
+            $.ajax({
+                type: "delete",
+                url:`/user/projects/${id}`,
+                success: function (res) {
+                    reference.closest('li').remove();
+                    toastr.success(res.message);
+                },
+                error: function (error) {
+                    console.log(error.responseJSON);
+                    toastr.error(error.responseJSON);
+                },
+            });
+
+
+
+        }
+    </script>
 @endsection

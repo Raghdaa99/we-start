@@ -71,7 +71,9 @@
                                 <li><a href="{{ url("dashboard-post-a-task.html") }}">Post a Task</a></li>
                             </ul>
                         </li>
+                        <li><a href="{{ route('contact') }}">Contact</a>
 
+                        </li>
 
                     </ul>
                 </nav>

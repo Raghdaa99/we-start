@@ -7,12 +7,15 @@
     <title>Hireo</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- CSS
     ================================================== -->
     <link rel="stylesheet" href="{{ asset("/assets/frontsite/css/style.css") }}">
     <link rel="stylesheet" href="{{ asset("/assets/frontsite/css/colors/blue.css") }}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+{{--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">--}}
 </head>
 <body>
 
@@ -27,7 +30,8 @@
 
 
 @yield('content')
-
+{{--{{\Request::route()->getName()}}--}}
+    @if(\Request::route()->getName() != 'full_projects')
 <!-- Footer
 ================================================== -->
     <div id="footer">
@@ -190,7 +194,7 @@
 
     </div>
     <!-- Footer / End -->
-
+    @endif
 </div>
 <!-- Wrapper / End -->
 
@@ -210,8 +214,9 @@
 <script src="{{ asset("/assets/frontsite/js/magnific-popup.min.js") }}"></script>
 <script src="{{ asset("/assets/frontsite/js/slick.min.js") }}"></script>
 <script src="{{ asset("/assets/frontsite/js/custom.js") }}"></script>
-
+{{--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>--}}
 <!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
+
 <script>
     // Snackbar for user status switcher
     $('#snackbar-user-status label').click(function () {
@@ -253,5 +258,6 @@
 <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgeuuDfRlweIs7D6uo4wdIHVvJ0LonQ6g&libraries=places&callback=initAutocomplete"></script>
 
+@yield('scripts')
 </body>
 </html>

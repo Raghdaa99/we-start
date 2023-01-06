@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->string('title');
+            $table->string('slug')->unique();
+            $table->string('location');
             $table->text('description');
             $table->enum('status', ['open', 'in-progress', 'closed']);
             $table->enum('type', ['hourly', 'fixed']);

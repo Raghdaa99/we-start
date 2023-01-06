@@ -13,7 +13,13 @@
             </ul>
         </nav>
     </div>
-    <form action="{{route('user.projects.update')}}" id="post-job" method="post" enctype="multipart/form-data">
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    <form action="{{route('user.projects.update',$project)}}" id="post-job" method="post" enctype="multipart/form-data">
         <!-- Row -->
         <div class="row">
 
@@ -33,7 +39,8 @@
                                 <div class="submit-field">
                                     <h5>Project Name</h5>
                                     <input type="text" name="title" class="with-border"
-                                           placeholder="e.g. build me a website">
+                                           placeholder="e.g. build me a website"
+                                           value="{{old('title',$project->title)}}">
                                 </div>
                             </div>
 
@@ -43,7 +50,8 @@
                                     <select class="selectpicker with-border" data-size="7" title="Select Category"
                                             name="category_id">
                                         @foreach($categories as $category)
-                                            <option value="{{$category->id}}">{{ $category->trans_name }}</option>
+                                            <option value="{{$category->id}}" @selected($project->category_id ==
+                                                $category->id)>{{ $category->trans_name }}</option>
                                         @endforeach
 
                                     </select>
@@ -57,36 +65,40 @@
                                         <div class="col-xl-6">
                                             <div class="input-with-icon">
                                                 <input class="with-border" type="text" placeholder="Minimum"
-                                                       name="min_budget">
+                                                       name="min_budget"
+                                                       value="{{old('min_budget',$project->min_budget)}}">
                                                 <i class="currency">USD</i>
                                             </div>
                                         </div>
                                         <div class="col-xl-6">
                                             <div class="input-with-icon">
                                                 <input class="with-border" type="text" placeholder="Maximum"
-                                                       name="max_budget">
+                                                       name="max_budget"
+                                                       value="{{old('max_budget',$project->max_budget)}}">
                                                 <i class="currency">USD</i>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="feedback-yes-no margin-top-0">
                                         <div class="radio">
-                                            <input id="fixed" name="type" value="fixed" type="radio" checked>
+                                            <input id="fixed" name="type" value="fixed" type="radio" @checked($project->type
+                                            == 'fixed')>
                                             <label for="fixed"><span class="radio-label"></span> Fixed Price
                                                 Project</label>
                                         </div>
                                         <div class="radio">
-                                            <input id="hourly" name="type" value="hourly" type="radio">
+                                            <input id="hourly" name="type" value="hourly" type="radio"
+                                                   @checked($project->type == 'hourly')>
                                             <label for="hourly"><span class="radio-label"></span> Hourly Price
                                                 Project</label>
                                         </div>
-{{--                                        @foreach($types as $type)--}}
-{{--                                            <div class="radio">--}}
-{{--                                                <input id="{{$type}}" value="{{$type}}" name="type" type="radio">--}}
-{{--                                                <label for="{{$type}}"><span class="radio-label"></span> {{$type}}--}}
-{{--                                                    Project</label>--}}
-{{--                                            </div>--}}
-{{--                                        @endforeach--}}
+                                        {{--                                        @foreach($types as $type)--}}
+                                        {{--                                            <div class="radio">--}}
+                                        {{--                                                <input id="{{$type}}" value="{{$type}}" name="type" type="radio">--}}
+                                        {{--                                                <label for="{{$type}}"><span class="radio-label"></span> {{$type}}--}}
+                                        {{--                                                    Project</label>--}}
+                                        {{--                                            </div>--}}
+                                        {{--                                        @endforeach--}}
 
                                     </div>
                                 </div>
@@ -104,7 +116,14 @@
                                             <button type="button" class="keyword-input-button ripple-effect"><i
                                                     class="icon-material-outline-add"></i></button>
                                         </div>
-                                        <div class="keywords-list"><!-- keywords go here --></div>
+                                        <div class="keywords-list">
+                                            @forelse($project->tags as $tag)
+                                                <span class="keyword"><span class="keyword-remove"></span><span
+                                                        class="keyword-text">{{$tag->name}}</span></span>
+                                            @empty
+
+                                            @endforelse
+                                        </div>
                                         <div class="clearfix"></div>
                                     </div>
 
@@ -114,13 +133,31 @@
                             <div class="col-xl-12">
                                 <div class="submit-field">
                                     <h5>Describe Your Project</h5>
-                                    <textarea name="description" cols="30" rows="5" class="with-border"></textarea>
+                                    <textarea name="description" cols="30" rows="5"
+                                              class="with-border">{{$project->description}}</textarea>
                                     <div class="uploadButton margin-top-30">
-                                        <input class="uploadButton-input" name="files[]" type="file" accept="image/*, application/pdf"
+                                        <input class="uploadButton-input" name="files[]" type="file"
+                                               accept="image/*, application/pdf"
                                                id="upload" multiple/>
                                         <label class="uploadButton-button ripple-effect" for="upload">Upload
                                             Files</label>
                                         <span class="uploadButton-file-name">Images or documents that might be helpful in describing your project</span>
+                                    </div>
+                                    <div>
+                                        <ul>
+                                            @foreach($project->files as $file)
+                                                <li>
+                                                    <div>
+                                                        <a href="{{ asset('storage/' . $file->path) }}">
+                                                            {{ $file->name. substr($file->path,strpos($file->path ,'.'),strlen($file->path)) }}
+                                                        </a>
+                                                        <button  type="button" onclick="deleteImage('{{$file->id}}',this)" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top">
+                                                            <i class="icon-feather-trash-2"></i>
+                                                        </button>
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +168,9 @@
             </div>
 
             <div class="col-xl-12">
-                <button  type="submit" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> Post a Task</button>
+                <button type="submit" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i>
+                   Edit a Task
+                </button>
             </div>
 
         </div>
@@ -142,6 +181,9 @@
 @endsection
 
 @section('scripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         $.ajaxSetup({
             headers: {
@@ -197,5 +239,40 @@
         }
 
         // console.log($('.keywords-list span:nth-child(3)').val);
+
+
+        function deleteImage(id, reference) {
+            Swal.fire({
+                title: 'Are you sure?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    performDelete(id, reference)
+                }
+            })
+        }
+
+        function performDelete(id, reference) {
+            $.ajax({
+                type: "delete",
+                url:`/user/image/${id}`,
+                success: function (res) {
+                    reference.closest('li').remove();
+                    toastr.success(res.message);
+                },
+                error: function (error) {
+                    console.log(error.responseJSON);
+                    toastr.error(error.responseJSON);
+                },
+            });
+
+
+
+        }
     </script>
+
 @endsection

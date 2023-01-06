@@ -47,12 +47,12 @@ class User extends Authenticatable
 
 
      // User has one freelaner profile
-     public function freelancer()
+     public function profile()
      {
-         return $this->hasOne(Freelancer::class, 'user_id', 'id')
+         return $this->hasOne(Profile::class, 'user_id', 'id')
              ->withDefault();
      }
- 
+
      public function projects()
      {
          return $this->hasMany(Project::class, 'user_id', 'id');
@@ -62,6 +62,11 @@ class User extends Authenticatable
      {
          return $this->morphOne(Image::class, 'imageable');
      }
+
+    public function proposals()
+    {
+        return $this->hasMany(Proposal::class, 'freelancer_id', 'id');
+    }
 
      protected function imageUrl(): Attribute
     {
@@ -76,5 +81,15 @@ class User extends Authenticatable
             },
         );
     }
- 
+
+    public function proposalsProject(){
+
+         return $this->belongsToMany(Project::class,
+             Proposal::class,
+             'freelancer_id',
+             'project_id')->withPivot([
+             'description', 'cost', 'duration', 'duration_unit', 'status',
+         ]);
+    }
+
 }

@@ -60,8 +60,7 @@ class ProfileUserController extends Controller
             ['message' => $isUpdate ? 'Profile updated' : 'failed!'],
             $isUpdate ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
         );
-        // return redirect()->route('freelancer.profile.edit')
-        //     ->with('success', 'Profile updated');
+
 
     }
 }

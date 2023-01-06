@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -82,7 +86,13 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('frontsite.dashboard-user.projects.edit-project',['project'=>$project]);
+//        dd($project->files);
+        return view('frontsite.dashboard-user.projects.edit-project',
+            [
+                'project'=>$project,
+                'categories' => Category::all(),
+            ]
+        );
     }
 
     /**
@@ -90,7 +100,7 @@ class ProjectController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Project $project)
     {
@@ -99,17 +109,41 @@ class ProjectController extends Controller
 
         //******************* Complete here
 
+        $data = $request->except('files');
+
+        $isUpdated =$project->update( $data );
+        $this->uploadFiles($request,$project);
+        if (strlen(trim($request->input('tags'))) > 0){
+            $tags = explode(', ', $request->input('tags'));
+            $project->syncTags($tags);
+        }
+
+       return response()->json(
+           ['message' => $isUpdated ? 'Success Updated ' : 'Failed Updated!'],
+           $isUpdated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Project  $project
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Project $project)
     {
-        //
+        $user = Auth::user();
+        $project = $user->projects()->findOrFail($project->id);
+        $isDeleted=$project->delete();
+
+        $project->files()->delete();
+
+        foreach ($project->files as $file) {
+            File::delete(public_path('storage/' . $file->path));
+        }
+
+        return response()->json(
+            ['message' => $isDeleted ? 'Success Deleted ' : 'Delete Updated!'],
+            $isDeleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
     }
 
     protected function uploadFiles(Request $request , $project)
@@ -127,11 +161,23 @@ class ProjectController extends Controller
 //                $files[] = $path;
                 $project->files()->create([
                     'path' => $path,
-                    'feature' => 1
+                    'feature' => 1,
+                    'name' => explode('.',$file->getClientOriginalName())[0],
                 ]);
             }
         }
 
         return $files;
+    }
+
+    public function deleteFile($id)
+    {
+        $image = Image::findOrFail($id);
+        $isDeleted = $image->delete();
+        File::delete(public_path('storage/' . $image->path));
+        return response()->json(
+            ['message' => $isDeleted ? 'Success Deleted ' : 'Delete failed!'],
+            $isDeleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
+        );
     }
 }
