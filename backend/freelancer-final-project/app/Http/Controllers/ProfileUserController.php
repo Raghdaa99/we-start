@@ -50,6 +50,8 @@ class ProfileUserController extends Controller
             ]);
         }
 
+        $user->type = $request->type;
+        $user->save();
         $isUpdate = $user->profile()->updateOrCreate([], $request->all());
 
         $user->forceFill([

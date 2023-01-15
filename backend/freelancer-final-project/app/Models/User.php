@@ -92,4 +92,21 @@ class User extends Authenticatable
          ]);
     }
 
+    public function contracts()
+    {
+        return $this->hasMany(Contract::class, 'freelancer_id', 'id');
+    }
+
+    public function contractedProjects()
+    {
+        return $this->belongsToMany(
+            Project::class,
+            'contracts',
+            'freelancer_id',
+            'project_id'
+        )->withPivot([
+            'proposal_id', 'cost',
+            'type', 'start_on', 'end_on', 'completed_on', 'hours', 'status'
+        ]);
+    }
 }

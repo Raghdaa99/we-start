@@ -50,17 +50,16 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!-- Task Details -->
+=                            <!-- Task Details -->
                             <ul class="dashboard-task-info">
-                                <li><strong>3</strong><span>Bids</span></li>
-                                <li><strong>$22</strong><span>Avg. Bid</span></li>
+                                <li><strong>{{$project->proposals_count}}</strong><span>Bids</span></li>
+                                <li><strong>${{$project->proposals->pluck('cost')->avg()?? 0}}</strong><span>Avg. Bid</span></li>
                                 <li><strong>${{$project->min_budget}} - ${{$project->max_budget}}</strong><span>{{$project->type}} Rate</span></li>
                             </ul>
 
                             <!-- Buttons -->
                             <div class="buttons-to-right always-visible">
-                                <a href="dashboard-manage-bidders.html" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> Manage Bidders <span class="button-info">3</span></a>
+                                <a href="{{route('user.project.manage.bidders',$project->slug)}}" class="button ripple-effect"><i class="icon-material-outline-supervisor-account"></i> Manage Bidders <span class="button-info">{{$project->proposals_count}}</span></a>
                                 <a href="{{route('user.projects.edit',$project)}}" class="button gray ripple-effect ico" title="Edit" data-tippy-placement="top"><i class="icon-feather-edit"></i></a>
                                 <a  onclick="projectDelete('{{$project->id}}',this)" class="button gray ripple-effect ico" data-tippy-placement="top" data-tippy="" data-original-title="Remove">
                                     <i class="icon-feather-trash-2"></i>

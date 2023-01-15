@@ -2,7 +2,7 @@
 @section('content')
 <!-- Dashboard Content
 	================================================== -->
-	
+
 			<!-- Dashboard Headline -->
 			<div class="dashboard-headline">
 				<h3>Howdy, Tom!</h3>
@@ -16,7 +16,7 @@
 					</ul>
 				</nav>
 			</div>
-	
+
 			<!-- Fun Facts Container -->
 			<div class="fun-facts-container">
 				<div class="fun-fact" data-fun-fact-color="#36bd78">
@@ -50,7 +50,7 @@
 					<div class="fun-fact-icon"><i class="icon-feather-trending-up"></i></div>
 				</div>
 			</div>
-			
+
 			<!-- Row -->
 			<div class="row">
 
@@ -79,13 +79,13 @@
 				<div class="col-xl-4">
 
 					<!-- Dashboard Box -->
-					<!-- If you want adjust height of two boxes 
-						 add to the lower box 'main-box-in-row' 
+					<!-- If you want adjust height of two boxes
+						 add to the lower box 'main-box-in-row'
 						 and 'child-box-in-row' to the higher box -->
-					<div class="dashboard-box child-box-in-row"> 
+					<div class="dashboard-box child-box-in-row">
 						<div class="headline">
 							<h3><i class="icon-material-outline-note-add"></i> Notes</h3>
-						</div>	
+						</div>
 
 						<div class="content with-padding">
 							<!-- Note -->
@@ -272,7 +272,7 @@
 			</div>
 			<!-- Row / End -->
 
-		
+
 		</div>
 	</div>
 	<!-- Dashboard Content / End -->

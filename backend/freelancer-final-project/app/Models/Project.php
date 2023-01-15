@@ -15,7 +15,7 @@ class Project extends Model
 
     protected $fillable = [
         'title', 'category_id', 'user_id', 'description', 'min_budget','max_budget',
-        'status', 'type',
+        'status', 'type','location'
     ];
 
     public function category()
@@ -98,4 +98,22 @@ class Project extends Model
             'description', 'cost', 'duration', 'duration_unit', 'status',
         ]);
     }
+
+    public function contracts()
+    {
+        return $this->hasMany(Contract::class);
+    }
+    public function contractedFreelancers()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'contracts',
+            'project_id',
+            'freelancer_id',
+        )->withPivot([
+            'proposal_id', 'cost',
+            'type', 'start_on', 'end_on', 'completed_on', 'hours', 'status'
+        ]);
+    }
+
 }

@@ -13,12 +13,21 @@
                             <div class="header-details">
                                 <h3>David Peterson <span>{{$user->profile->title}}</span></h3>
                                 <ul>
-                                    <li><div class="star-rating" data-rating="5.0"></div></li>
-                                    <li><img class="flag" src="{{ asset('/assets/frontsite/images/flags/'.$user->profile->country.'.svg') }}" alt="">
-                                        {{Symfony\Component\Intl\Countries::getName($user->profile->country)}}
+                                    <li>
+                                        <div class="star-rating" data-rating="5.0"></div>
                                     </li>
+                                    @if($user->profile->country)
+                                    <li><img class="flag"
+                                             src="{{ asset('/assets/frontsite/images/flags/'.$user->profile->country.'.svg') }}"
+                                             alt="">
+                                        {{Symfony\Component\Intl\Countries::getName($user->profile->country) ?? ''}}
+                                    </li>
+                                    @endif
+
                                     @if($user->email_verified_at)
-                                    <li><div class="verified-badge-with-title">Verified</div></li>
+                                        <li>
+                                            <div class="verified-badge-with-title">Verified</div>
+                                        </li>
                                     @endif
                                 </ul>
                             </div>
@@ -41,7 +50,7 @@
                 <!-- Page Content -->
                 <div class="single-page-section">
                     <h3 class="margin-bottom-25">About Me</h3>
-{{$user->profile->description}}
+                    {{$user->profile->description}}
                 </div>
 
                 <!-- Boxed List -->
@@ -57,10 +66,13 @@
                                     <h4>Web, Database and API Developer <span>Rated as Freelancer</span></h4>
                                     <div class="item-details margin-top-10">
                                         <div class="star-rating" data-rating="5.0"></div>
-                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> August 2018</div>
+                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> August
+                                            2018
+                                        </div>
                                     </div>
                                     <div class="item-description">
-                                        <p>Excellent programmer - fully carried out my project in a very professional manner. </p>
+                                        <p>Excellent programmer - fully carried out my project in a very professional
+                                            manner. </p>
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +84,9 @@
                                     <h4>WordPress Theme Installation <span>Rated as Freelancer</span></h4>
                                     <div class="item-details margin-top-10">
                                         <div class="star-rating" data-rating="5.0"></div>
-                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> June 2018</div>
+                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> June
+                                            2018
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -84,10 +98,14 @@
                                     <h4>Fix Python Selenium Code <span>Rated as Employer</span></h4>
                                     <div class="item-details margin-top-10">
                                         <div class="star-rating" data-rating="5.0"></div>
-                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> May 2018</div>
+                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> May
+                                            2018
+                                        </div>
                                     </div>
                                     <div class="item-description">
-                                        <p>I was extremely impressed with the quality of work AND how quickly he got it done. He then offered to help with another side part of the project that we didn't even think about originally.</p>
+                                        <p>I was extremely impressed with the quality of work AND how quickly he got it
+                                            done. He then offered to help with another side part of the project that we
+                                            didn't even think about originally.</p>
                                     </div>
                                 </div>
                             </div>
@@ -99,10 +117,13 @@
                                     <h4>PHP Core Website Fixes <span>Rated as Freelancer</span></h4>
                                     <div class="item-details margin-top-10">
                                         <div class="star-rating" data-rating="5.0"></div>
-                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> May 2018</div>
+                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> May
+                                            2018
+                                        </div>
                                     </div>
                                     <div class="item-description">
-                                        <p>Awesome work, definitely will rehire. Poject was completed not only with the requirements, but on time, within our small budget.</p>
+                                        <p>Awesome work, definitely will rehire. Poject was completed not only with the
+                                            requirements, but on time, within our small budget.</p>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +137,8 @@
                             <ul>
                                 <li><a href="{{ url("#") }}" class="ripple-effect current-page">1</a></li>
                                 <li><a href="{{ url("#") }}" class="ripple-effect">2</a></li>
-                                <li class="pagination-arrow"><a href="{{ url("#") }}" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
+                                <li class="pagination-arrow"><a href="{{ url("#") }}" class="ripple-effect"><i
+                                            class="icon-material-outline-keyboard-arrow-right"></i></a></li>
                             </ul>
                         </nav>
                     </div>
@@ -125,7 +147,6 @@
 
                 </div>
                 <!-- Boxed List / End -->
-
 
 
             </div>
@@ -137,13 +158,15 @@
 
                     <!-- Profile Overview -->
                     <div class="profile-overview">
-                        <div class="overview-item"><strong>${{$user->profile->hourly_rate}}</strong><span>Hourly Rate</span></div>
+                        <div class="overview-item">
+                            <strong>${{$user->profile->hourly_rate ?? 0}}</strong><span>Hourly Rate</span></div>
                         <div class="overview-item"><strong>53</strong><span>Jobs Done</span></div>
                         <div class="overview-item"><strong>22</strong><span>Rehired</span></div>
                     </div>
 
                     <!-- Button -->
-                    <a href="{{ url("#small-dialog") }}" class="apply-now-button popup-with-zoom-anim margin-bottom-50">Make an Offer <i class="icon-material-outline-arrow-right-alt"></i></a>
+                    <a href="{{ url("#small-dialog") }}" class="apply-now-button popup-with-zoom-anim margin-bottom-50">Make
+                        an Offer <i class="icon-material-outline-arrow-right-alt"></i></a>
 
                     <!-- Freelancer Indicators -->
                     <div class="sidebar-widget">
@@ -184,10 +207,14 @@
                         <h3>Social Profiles</h3>
                         <div class="freelancer-socials margin-top-25">
                             <ul>
-                                <li><a href="{{ url("#") }}" title="Dribbble" data-tippy-placement="top"><i class="icon-brand-dribbble"></i></a></li>
-                                <li><a href="{{ url("#") }}" title="Twitter" data-tippy-placement="top"><i class="icon-brand-twitter"></i></a></li>
-                                <li><a href="{{ url("#") }}" title="Behance" data-tippy-placement="top"><i class="icon-brand-behance"></i></a></li>
-                                <li><a href="{{ url("#") }}" title="GitHub" data-tippy-placement="top"><i class="icon-brand-github"></i></a></li>
+                                <li><a href="{{ url("#") }}" title="Dribbble" data-tippy-placement="top"><i
+                                            class="icon-brand-dribbble"></i></a></li>
+                                <li><a href="{{ url("#") }}" title="Twitter" data-tippy-placement="top"><i
+                                            class="icon-brand-twitter"></i></a></li>
+                                <li><a href="{{ url("#") }}" title="Behance" data-tippy-placement="top"><i
+                                            class="icon-brand-behance"></i></a></li>
+                                <li><a href="{{ url("#") }}" title="GitHub" data-tippy-placement="top"><i
+                                            class="icon-brand-github"></i></a></li>
 
                             </ul>
                         </div>
@@ -210,14 +237,14 @@
                     <div class="sidebar-widget">
                         <h3>Attachments</h3>
                         <div class="attachments-container">
-{{--                            @foreach($project->files as $file)--}}
-{{--                                <a href="{{ asset('storage/' . $file->path) }}" class="attachment-box ripple-effect"--}}
-{{--                                   target="_blank">--}}
-{{--                                    <span> {{ $file->name }}</span>--}}
-{{--                                    <i>{{strtoupper(substr($file->path,strpos($file->path ,'.')+1,strlen($file->path)))}}</i></a>--}}
+                            {{--                            @foreach($project->files as $file)--}}
+                            {{--                                <a href="{{ asset('storage/' . $file->path) }}" class="attachment-box ripple-effect"--}}
+                            {{--                                   target="_blank">--}}
+                            {{--                                    <span> {{ $file->name }}</span>--}}
+                            {{--                                    <i>{{strtoupper(substr($file->path,strpos($file->path ,'.')+1,strlen($file->path)))}}</i></a>--}}
 
 
-{{--                            @endforeach--}}
+                            {{--                            @endforeach--}}
                             <a href="{{ url("#") }}" class="attachment-box ripple-effect"><span>Cover Letter</span><i>PDF</i></a>
                         </div>
                     </div>
@@ -236,7 +263,9 @@
                         <!-- Copy URL -->
                         <div class="copy-url">
                             <input id="copy-url" type="text" value="" class="with-border">
-                            <button class="copy-url-button ripple-effect" data-clipboard-target="#copy-url" title="Copy to Clipboard" data-tippy-placement="top"><i class="icon-material-outline-file-copy"></i></button>
+                            <button class="copy-url-button ripple-effect" data-clipboard-target="#copy-url"
+                                    title="Copy to Clipboard" data-tippy-placement="top"><i
+                                    class="icon-material-outline-file-copy"></i></button>
                         </div>
 
                         <!-- Share Buttons -->
@@ -245,10 +274,15 @@
                             <div class="share-buttons-content">
                                 <span>Interesting? <strong>Share It!</strong></span>
                                 <ul class="share-buttons-icons">
-                                    <li><a href="{{ url("#") }}" data-button-color="#3b5998" title="Share on Facebook" data-tippy-placement="top"><i class="icon-brand-facebook-f"></i></a></li>
-                                    <li><a href="{{ url("#") }}" data-button-color="#1da1f2" title="Share on Twitter" data-tippy-placement="top"><i class="icon-brand-twitter"></i></a></li>
-                                    <li><a href="{{ url("#") }}" data-button-color="#dd4b39" title="Share on Google Plus" data-tippy-placement="top"><i class="icon-brand-google-plus-g"></i></a></li>
-                                    <li><a href="{{ url("#") }}" data-button-color="#0077b5" title="Share on LinkedIn" data-tippy-placement="top"><i class="icon-brand-linkedin-in"></i></a></li>
+                                    <li><a href="{{ url("#") }}" data-button-color="#3b5998" title="Share on Facebook"
+                                           data-tippy-placement="top"><i class="icon-brand-facebook-f"></i></a></li>
+                                    <li><a href="{{ url("#") }}" data-button-color="#1da1f2" title="Share on Twitter"
+                                           data-tippy-placement="top"><i class="icon-brand-twitter"></i></a></li>
+                                    <li><a href="{{ url("#") }}" data-button-color="#dd4b39"
+                                           title="Share on Google Plus" data-tippy-placement="top"><i
+                                                class="icon-brand-google-plus-g"></i></a></li>
+                                    <li><a href="{{ url("#") }}" data-button-color="#0077b5" title="Share on LinkedIn"
+                                           data-tippy-placement="top"><i class="icon-brand-linkedin-in"></i></a></li>
                                 </ul>
                             </div>
                         </div>

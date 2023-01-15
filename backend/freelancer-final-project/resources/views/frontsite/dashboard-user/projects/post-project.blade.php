@@ -49,7 +49,17 @@
                                     </select>
                                 </div>
                             </div>
-
+                            <div class="col-xl-4">
+                                <div class="submit-field">
+                                    <h5>Location</h5>
+                                    <div class="input-with-icon">
+                                        <div id="autocomplete-container">
+                                            <input  name="location" class="with-border" type="text" placeholder="Type Address">
+                                        </div>
+                                        <i class="icon-material-outline-location-on"></i>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-xl-6">
                                 <div class="submit-field">
                                     <h5>What is your estimated budget?</h5>

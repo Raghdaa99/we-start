@@ -21,8 +21,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Auth::user()->projects;
-        return view('frontsite.dashboard-user.projects.manage-projects',['projects'=>$projects]);
+//        $projects = Auth::user()->projects->withCount('proposals');
+        $projects = Project::where('user_id', Auth::id())->withCount('proposals')->get();
+        return view('frontsite.dashboard-user.projects.manage-projects', ['projects' => $projects]);
     }
 
     /**
@@ -42,7 +43,7 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(ProjectRequest $request)
@@ -58,9 +59,9 @@ class ProjectController extends Controller
         $data = $request->except('files');
 
 
-        $project = $user->projects()->create( $data );
-        $this->uploadFiles($request,$project);
-        if (strlen(trim($request->input('tags'))) > 0){
+        $project = $user->projects()->create($data);
+        $this->uploadFiles($request, $project);
+        if (strlen(trim($request->input('tags'))) > 0) {
             $tags = explode(', ', $request->input('tags'));
             $project->syncTags($tags);
         }
@@ -70,7 +71,7 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param \App\Models\Project $project
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project)
@@ -81,7 +82,7 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param \App\Models\Project $project
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit(Project $project)
@@ -89,7 +90,7 @@ class ProjectController extends Controller
 //        dd($project->files);
         return view('frontsite.dashboard-user.projects.edit-project',
             [
-                'project'=>$project,
+                'project' => $project,
                 'categories' => Category::all(),
             ]
         );
@@ -98,8 +99,8 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Project  $project
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Project $project
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Project $project)
@@ -111,29 +112,29 @@ class ProjectController extends Controller
 
         $data = $request->except('files');
 
-        $isUpdated =$project->update( $data );
-        $this->uploadFiles($request,$project);
-        if (strlen(trim($request->input('tags'))) > 0){
+        $isUpdated = $project->update($data);
+        $this->uploadFiles($request, $project);
+        if (strlen(trim($request->input('tags'))) > 0) {
             $tags = explode(', ', $request->input('tags'));
             $project->syncTags($tags);
         }
 
-       return response()->json(
-           ['message' => $isUpdated ? 'Success Updated ' : 'Failed Updated!'],
-           $isUpdated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
+        return response()->json(
+            ['message' => $isUpdated ? 'Success Updated ' : 'Failed Updated!'],
+            $isUpdated ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Project  $project
+     * @param \App\Models\Project $project
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Project $project)
     {
         $user = Auth::user();
         $project = $user->projects()->findOrFail($project->id);
-        $isDeleted=$project->delete();
+        $isDeleted = $project->delete();
 
         $project->files()->delete();
 
@@ -146,7 +147,7 @@ class ProjectController extends Controller
             $isDeleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
     }
 
-    protected function uploadFiles(Request $request , $project)
+    protected function uploadFiles(Request $request, $project)
     {
         if (!$request->hasFile('files')) {
             return;
@@ -162,7 +163,7 @@ class ProjectController extends Controller
                 $project->files()->create([
                     'path' => $path,
                     'feature' => 1,
-                    'name' => explode('.',$file->getClientOriginalName())[0],
+                    'name' => explode('.', $file->getClientOriginalName())[0],
                 ]);
             }
         }
@@ -180,4 +181,20 @@ class ProjectController extends Controller
             $isDeleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
         );
     }
+
+    public function manage_bidders($slug,Request $request)
+    {
+        if ($request->has('notify_id')){
+//            dd($request->notify_id);
+            $user = Auth::user();
+            $notify = $user->notifications->find($request->notify_id);
+            $notify->markAsRead();
+        }
+        $project = Project::whereSlug($slug)->with('proposals.freelancer')->first();
+        return view('frontsite.dashboard-user.projects.manage-bidders',
+            ['project' => $project]
+        );
+    }
+
+
 }

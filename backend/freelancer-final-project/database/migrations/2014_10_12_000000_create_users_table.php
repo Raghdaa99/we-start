@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('phone')->unique()->nullable();
             $table->rememberToken();
             $table->enum('type', ['freelancer', 'client'])->default('client');
+            $table->string('channels')->nullable();
             $table->timestamps();
         });
     }

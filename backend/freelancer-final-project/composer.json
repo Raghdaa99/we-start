@@ -11,7 +11,9 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "symfony/intl": "^6.0"
+        "pusher/pusher-php-server": "^7.2",
+        "symfony/intl": "^6.0",
+      "ext-http": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

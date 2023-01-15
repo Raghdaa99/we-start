@@ -21,10 +21,14 @@
                                     <li>
                                         <div class="star-rating" data-rating="5.0"></div>
                                     </li>
+
+                                    @if($project->user->profile->country)
                                     <li><img class="flag"
                                              src="{{ asset('/assets/frontsite/images/flags/'.$project->user->profile->country.'.svg') }}"
                                              alt=""> {{Symfony\Component\Intl\Countries::getName($project->user->profile->country)}}
                                     </li>
+                                    @endif
+
                                     @if($project->user->email_verified_at)
                                         <li>
                                             <div class="verified-badge-with-title">Verified</div>

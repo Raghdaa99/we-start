@@ -5,13 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Proposal extends Model
+class Contract extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'freelancer_id', 'project_id', 'description', 'cost',
-        'duration', 'duration_unit', 'status',
+        'freelancer_id', 'project_id', 'proposal_id', 'cost',
+        'type', 'start_on', 'end_on', 'completed_on', 'hours', 'status',
+    ];
+
+    protected $casts = [
+        'start_on' => 'datetime',
+        'end_on' => 'datetime',
+        'completed_on' => 'datetime',
     ];
 
     public function freelancer()
@@ -23,15 +28,10 @@ class Proposal extends Model
     {
         return $this->belongsTo(Project::class, 'project_id', 'id');
     }
-    public static function duration_units()
+
+    public function proposal()
     {
-        return [
-            'day', 'week', 'month', 'year'
-        ];
-    }
-    public function contract()
-    {
-        return $this->hasOne(Contract::class, 'proposal_id', 'id')
+        return $this->belongsTo(Proposal::class, 'proposal_id', 'id')
             ->withDefault();
     }
 }

@@ -67,6 +67,11 @@ Route::prefix('/user')->name('user.')->middleware('auth')->group(function () {
 
     Route::resource('projects', ProjectController::class);
     Route::delete('/image/{id}', [ProjectController::class, 'deleteFile'])->name('delete_Image');
+    Route::get('/manage-bidders/{slug}', [ProjectController::class, 'manage_bidders'])->name('project.manage.bidders');
+
+    Route::get('proposal/{id}',[FreelancerController::class,'getProposal'])->name('getProposal');
+    Route::delete('proposal/{id}',[FreelancerController::class,'deleteProposal'])->name('deleteProposal');
+    Route::post('proposal',[FreelancerController::class,'contract'])->name('contract');
 
 });
 
