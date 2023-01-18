@@ -75,29 +75,7 @@
                             </a>
                         </li>
 
-                        <!-- Notification -->
-                        <li class="notifications-not-read">
-                            <a href="{{ url("dashboard-messages.html") }}">
-                                <span class="notification-avatar status-offline"><img src="{{ asset("/assets/frontsite/images/user-avatar-small-02.jpg") }}" alt=""></span>
-                                <div class="notification-text">
-                                    <strong>Sindy Forest</strong>
-                                    <p class="notification-msg-text">Hi Tom! Hate to break it to you, but I'm actually on vacation until...</p>
-                                    <span class="color">Yesterday</span>
-                                </div>
-                            </a>
-                        </li>
 
-                        <!-- Notification -->
-                        <li class="notifications-not-read">
-                            <a href="{{ url("dashboard-messages.html") }}">
-                                <span class="notification-avatar status-online"><img src="{{ asset("/assets/frontsite/images/user-avatar-placeholder.png") }}" alt=""></span>
-                                <div class="notification-text">
-                                    <strong>Marcin Kowalski</strong>
-                                    <p class="notification-msg-text">I received payment. Thanks for cooperation!</p>
-                                    <span class="color">Yesterday</span>
-                                </div>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>

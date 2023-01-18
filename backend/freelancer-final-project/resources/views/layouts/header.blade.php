@@ -117,7 +117,7 @@
                                                 src="{{ asset("/assets/frontsite/images/user-avatar-small-01.jpg") }}"
                                                 alt=""></div>
                                         <div class="user-name">
-                                            Tom Smith <span>Freelancer</span>
+                                            {{Auth::user()->name}} <span>{{Auth::user()->type}}</span>
                                         </div>
                                     </div>
 
@@ -133,7 +133,7 @@
                                 <ul class="user-menu-small-nav">
                                     <li><a href="{{ route("user.dashboard") }}"><i
                                                 class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-                                    <li><a href="{{ url("dashboard-settings.html") }}"><i
+                                    <li><a href="{{ route("user.settings") }}"><i
                                                 class="icon-material-outline-settings"></i> Settings</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}" class="nav-link"

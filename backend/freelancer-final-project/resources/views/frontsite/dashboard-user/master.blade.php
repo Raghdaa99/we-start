@@ -39,32 +39,31 @@
                         <div class="dashboard-nav-inner">
 
                             <ul data-submenu-title="Start">
-                                <li class="active"><a href="{{ route('user.dashboard') }}"><i
+
+                                <li class=" {{active('user.dashboard')}}"><a href="{{ route('user.dashboard') }}"><i
                                             class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-                                <li><a href="{{ url("dashboard-messages.html") }}"><i
+                                <li class=" {{active('user.messages')}}"><a href="{{ route("user.messages") }}"><i
                                             class="icon-material-outline-question-answer"></i> Messages <span
                                             class="nav-tag">2</span></a></li>
                                 <li><a href="{{ url("dashboard-bookmarks.html") }}"><i
                                             class="icon-material-outline-star-border"></i> Bookmarks</a></li>
-                                <li><a href="{{ url("dashboard-reviews.html") }}"><i
+                                <li class=" {{active('user.reviews')}}"><a href="{{ route("user.reviews") }}"><i
                                             class="icon-material-outline-rate-review"></i> Reviews</a></li>
                             </ul>
 
                             <ul data-submenu-title="Organize and Manage">
 
-                                <li><a href="{{ url("#") }}"><i class="icon-material-outline-assignment"></i>
+                                <li class=" {{active('user.projects.index')}}"><a href="{{ route("user.projects.index") }}"><i class="icon-material-outline-assignment"></i>
                                         Projects</a>
                                     <ul>
-                                        <li><a href="{{ route("user.projects.index") }}">Manage Projects <span
-                                                    class="nav-tag">2</span></a></li>
-                                        <li><a href="{{ url("dashboard-manage-bidders.html") }}">Manage Bidders</a></li>
-                                        <li><a href="{{ route("user.projects.create") }}">Post a Project</a></li>
+                                        <li class=" {{active('user.projects.index')}}"><a href="{{ route("user.projects.index") }}">Manage Projects</a></li>
+                                        <li class=" {{active('user.projects.create')}}"><a href="{{ route("user.projects.create") }}">Post a Project</a></li>
                                     </ul>
                                 </li>
                             </ul>
 
                             <ul data-submenu-title="Account">
-                                <li><a href="{{ route('user.settings')  }}"><i
+                                <li class=" {{active('user.settings')}}"><a href="{{ route('user.settings')  }}"><i
                                             class="icon-material-outline-settings"></i> Settings</a></li>
                                 <li>
                                     <a href="{{ route('logout') }}" class="nav-link"

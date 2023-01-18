@@ -1,11 +1,15 @@
 import './bootstrap';
 
 import Alpine from 'alpinejs';
+import {createApp} from "vue";
+import MessageView from "./components/MessageView.vue";
+// import MessageContent from "./components/MessageContent.vue";
+// import ListUsers from "./components/ListUsers.vue";
 
 window.Alpine = Alpine;
 
 Alpine.start();
-
+// vue/dist/vue.esm-bundler
 Echo.private('App.Models.User.'+ userId)
     .notification((notification) => {
         console.log(notification.type);
@@ -28,3 +32,9 @@ Echo.private('App.Models.User.'+ userId)
     });
 
 console.log('ss jiidj ');
+
+const app = createApp(MessageView);
+// app.component('MessageContent',MessageContent)
+// app.component('ListUsers',ListUsers)
+app.mount('#app');
+

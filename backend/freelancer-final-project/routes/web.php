@@ -1,9 +1,11 @@
 <?php
 
 
+use App\Http\Controllers\Api\MessagesController;
 use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\FreelancerController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -73,6 +75,12 @@ Route::prefix('/user')->name('user.')->middleware('auth')->group(function () {
     Route::delete('proposal/{id}',[FreelancerController::class,'deleteProposal'])->name('deleteProposal');
     Route::post('proposal',[FreelancerController::class,'contract'])->name('contract');
 
+    Route::get('/messages',[MessageController::class,'getMessages'])->name('messages');
+    Route::get('/messages-content/{recipient_id}',[MessageController::class,'getMessagesContent']);
+    Route::get('/users',[MessageController::class,'getUsers']);
+    Route::post('/messages/store',[MessageController::class,'storeMessages']);
+
+    Route::get('/reviews',[MessageController::class,'getReviews'])->name('reviews');
 });
 
 

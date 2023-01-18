@@ -43,8 +43,7 @@ class ProfileUserController extends Controller
             ]);
 
 
-
-            $user->image()->create([
+            $user->image()->updateOrCreate([],[
                 'path' => $filepath,
                 'feature' => 1
             ]);

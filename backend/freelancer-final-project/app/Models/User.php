@@ -109,4 +109,18 @@ class User extends Authenticatable
             'type', 'start_on', 'end_on', 'completed_on', 'hours', 'status'
         ]);
     }
+
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'user_id', 'id');
+    }
+
+    public function receivedMessages()
+    {
+        return $this->belongsToMany(Message::class, 'recipients')
+            ->withPivot([
+                'read_at',
+            ]);
+    }
+
 }
