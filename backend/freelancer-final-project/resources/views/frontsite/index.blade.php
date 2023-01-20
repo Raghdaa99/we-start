@@ -28,14 +28,7 @@
                 <div class="col-md-12">
                     <div class="intro-banner-search-form margin-top-95">
 
-                        <!-- Search Field -->
-                        <div class="intro-search-field with-autocomplete">
-                            <label for="autocomplete-input" class="field-title ripple-effect">Where?</label>
-                            <div class="input-with-icon">
-                                <input id="autocomplete-input" type="text" placeholder="Online Job">
-                                <i class="icon-material-outline-location-on"></i>
-                            </div>
-                        </div>
+
 
                         <!-- Search Field -->
                         <div class="intro-search-field">
@@ -47,24 +40,19 @@
                         <div class="intro-search-field">
                             <select class="selectpicker default" multiple data-selected-text-format="count"
                                     data-size="7" title="All Categories">
-                                <option>Admin Support</option>
-                                <option>Customer Service</option>
-                                <option>Data Analytics</option>
-                                <option>Design & Creative</option>
-                                <option>Legal</option>
-                                <option>Software Developing</option>
-                                <option>IT & Networking</option>
-                                <option>Writing</option>
-                                <option>Translation</option>
-                                <option>Sales & Marketing</option>
+                                @foreach($categories as $category)
+                                    <option>{{$category->trans_name}}</option>
+
+                                @endforeach
+
                             </select>
                         </div>
 
                         <!-- Button -->
                         <div class="intro-search-button">
-                            <button class="button ripple-effect"
-                                    onclick="window.location.href='freelancers-grid-layout-full-page.html'">Search
-                            </button>
+                            <a class="button ripple-effect"
+                                    href="{{route('full_projects')}}">Search
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -75,15 +63,15 @@
                 <div class="col-md-12">
                     <ul class="intro-stats margin-top-45 hide-under-992px">
                         <li>
-                            <strong class="counter">1,586</strong>
+                            <strong class="counter">0</strong>
                             <span>Jobs Posted</span>
                         </li>
                         <li>
-                            <strong class="counter">3,543</strong>
+                            <strong class="counter">{{$count_projects}}</strong>
                             <span>Tasks Posted</span>
                         </li>
                         <li>
-                            <strong class="counter">1,232</strong>
+                            <strong class="counter">{{$count_freelancers}}</strong>
                             <span>Freelancers</span>
                         </li>
                     </ul>

@@ -1,7 +1,6 @@
 <?php
 
 
-use App\Http\Controllers\Api\MessagesController;
 use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\FreelancerController;

@@ -17,61 +17,18 @@
                 <nav id="navigation">
                     <ul id="responsive">
 
-                        <li><a href="{{ url("/") }}" class="current">Home</a>
+                        <li><a href="{{ route("home") }}" class="{{current_page('home')}}">Home</a>
 
                         </li>
 
-                        <li><a href="{{ url("#") }}">Find Work</a>
-                            <ul class="dropdown-nav">
-                                <li><a href="{{ url("#") }}">Browse Jobs</a>
-                                    <ul class="dropdown-nav">
-                                        <li><a href="{{ url("jobs-list-layout-full-page-map.html") }}">Full Page
-                                                List + Map</a></li>
-                                        <li><a href="{{ url("jobs-grid-layout-full-page-map.html") }}">Full Page
-                                                Grid + Map</a></li>
-                                        <li><a href="{{ url("jobs-grid-layout-full-page.html") }}">Full Page
-                                                Grid</a></li>
-                                        <li><a href="{{ url("jobs-list-layout-1.html") }}">List Layout 1</a></li>
-                                        <li><a href="{{ url("jobs-list-layout-2.html") }}">List Layout 2</a></li>
-                                        <li><a href="{{ url("jobs-grid-layout.html") }}">Grid Layout</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="{{ url("#") }}">Browse Tasks</a>
-                                    <ul class="dropdown-nav">
-                                        <li><a href="{{ url("tasks-list-layout-1.html") }}">List Layout 1</a></li>
-                                        <li><a href="{{ url("tasks-list-layout-2.html") }}">List Layout 2</a></li>
-                                        <li><a href="{{ url("tasks-grid-layout.html") }}">Grid Layout</a></li>
-                                        <li><a href="{{ url("tasks-grid-layout-full-page.html") }}">Full Page
-                                                Grid</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="{{ url("browse-companies.html") }}">Browse Companies</a></li>
-                                <li><a href="{{ url("single-job-page.html") }}">Job Page</a></li>
-                                <li><a href="{{ url("single-task-page.html") }}">Task Page</a></li>
-                                <li><a href="{{ url("single-company-profile.html") }}">Company Profile</a></li>
-                            </ul>
+                        <li><a href="{{ route("full_projects") }}"  class="{{current_page('full_projects')}}">Browse Projects</a>
+
                         </li>
 
-                        <li><a href="{{ url("#") }}">For Employers</a>
-                            <ul class="dropdown-nav">
-                                <li><a href="{{ url("#") }}">Find a Freelancer</a>
-                                    <ul class="dropdown-nav">
-                                        <li><a href="{{ url("freelancers-grid-layout-full-page.html") }}">Full Page
-                                                Grid</a></li>
-                                        <li><a href="{{ url("freelancers-grid-layout.html") }}">Grid Layout</a></li>
-                                        <li><a href="{{ url("freelancers-list-layout-1.html") }}">List Layout 1</a>
-                                        </li>
-                                        <li><a href="{{ url("freelancers-list-layout-2.html") }}">List Layout 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a href="{{ url("single-freelancer-profile.html") }}">Freelancer Profile</a>
-                                </li>
-                                <li><a href="{{ url("dashboard-post-a-job.html") }}">Post a Job</a></li>
-                                <li><a href="{{ url("dashboard-post-a-task.html") }}">Post a Task</a></li>
-                            </ul>
+                        <li><a href="{{ url("#") }}">Find a Freelancer</a>
+
                         </li>
-                        <li><a href="{{ route('contact') }}">Contact</a>
+                        <li><a href="{{ route('contact') }}" class="{{current_page('contact')}}">Contact</a>
 
                         </li>
 
@@ -86,7 +43,6 @@
 
             <!-- Right Side Content / End -->
             <div class="right-side">
-
             @if(Auth::user())
                 <!--  User Notifications -->
                     <x-notification-menu/>
