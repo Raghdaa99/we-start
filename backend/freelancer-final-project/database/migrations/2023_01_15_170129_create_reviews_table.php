@@ -17,8 +17,6 @@ return new class extends Migration
             $table->id();
             $table->text('comment');
             $table->integer('star');
-            $table->boolean('delivered_on_budget');
-            $table->boolean('delivered_on_time');
             $table->foreignId('freelancer_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('project_id')->constrained('projects')->cascadeOnDelete();
             $table->foreignId('contract_id')->constrained('contracts')->cascadeOnDelete();

@@ -47,7 +47,7 @@
                                             class="nav-tag">2</span></a></li>
                                 <li class=" {{active('user.checkout')}}"><a href="{{ route("user.checkout") }}"><i
                                             class="icon-material-outline-account-balance"></i> Checkout</a></li>
-                                <li class=" {{active('user.reviews')}}"><a href="{{ route("user.reviews") }}"><i
+                                <li class=" {{active('user.reviews.index')}}"><a href="{{ route("user.reviews.index") }}"><i
                                             class="icon-material-outline-rate-review"></i> Reviews</a></li>
                             </ul>
 

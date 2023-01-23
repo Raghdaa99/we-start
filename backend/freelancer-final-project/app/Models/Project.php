@@ -33,6 +33,10 @@ class Project extends Model
         return $this->morphMany(Image::class, 'imageable')->where('feature', 1);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
     public function tags()
     {
         return $this->belongsToMany(

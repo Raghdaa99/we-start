@@ -11,10 +11,10 @@
                         <div class="left-side">
                             <div class="header-image freelancer-avatar"><img src="{{$user->image_url}}" alt=""></div>
                             <div class="header-details">
-                                <h3>David Peterson <span>{{$user->profile->title}}</span></h3>
+                                <h3>{{$user->name}} <span>{{$user->profile->title}}</span></h3>
                                 <ul>
                                     <li>
-                                        <div class="star-rating" data-rating="5.0"></div>
+                                        <div class="star-rating" data-rating="{{$user->rate}}"></div>
                                     </li>
                                     @if($user->profile->country)
                                     <li><img class="flag"
@@ -59,89 +59,28 @@
                         <h3><i class="icon-material-outline-thumb-up"></i> Work History and Feedback</h3>
                     </div>
                     <ul class="boxed-list-ul">
+                        @forelse($user->reviews as $review)
                         <li>
                             <div class="boxed-list-item">
                                 <!-- Content -->
                                 <div class="item-content">
-                                    <h4>Web, Database and API Developer <span>Rated as Freelancer</span></h4>
+                                    <h4>{{$review->project->title}} <span>Rated as Freelancer</span></h4>
                                     <div class="item-details margin-top-10">
-                                        <div class="star-rating" data-rating="5.0"></div>
-                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> August
-                                            2018
+                                        <div class="star-rating" data-rating="{{$review->star}}"></div>
+                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> {{$review->created_at->format('D Y')}}
                                         </div>
                                     </div>
                                     <div class="item-description">
-                                        <p>Excellent programmer - fully carried out my project in a very professional
-                                            manner. </p>
+                                        <p>{{$review->comment}} </p>
                                     </div>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div class="boxed-list-item">
-                                <!-- Content -->
-                                <div class="item-content">
-                                    <h4>WordPress Theme Installation <span>Rated as Freelancer</span></h4>
-                                    <div class="item-details margin-top-10">
-                                        <div class="star-rating" data-rating="5.0"></div>
-                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> June
-                                            2018
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="boxed-list-item">
-                                <!-- Content -->
-                                <div class="item-content">
-                                    <h4>Fix Python Selenium Code <span>Rated as Employer</span></h4>
-                                    <div class="item-details margin-top-10">
-                                        <div class="star-rating" data-rating="5.0"></div>
-                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> May
-                                            2018
-                                        </div>
-                                    </div>
-                                    <div class="item-description">
-                                        <p>I was extremely impressed with the quality of work AND how quickly he got it
-                                            done. He then offered to help with another side part of the project that we
-                                            didn't even think about originally.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="boxed-list-item">
-                                <!-- Content -->
-                                <div class="item-content">
-                                    <h4>PHP Core Website Fixes <span>Rated as Freelancer</span></h4>
-                                    <div class="item-details margin-top-10">
-                                        <div class="star-rating" data-rating="5.0"></div>
-                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> May
-                                            2018
-                                        </div>
-                                    </div>
-                                    <div class="item-description">
-                                        <p>Awesome work, definitely will rehire. Poject was completed not only with the
-                                            requirements, but on time, within our small budget.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                        @empty
+                            not found
+                        @endforelse
                     </ul>
 
-                    <!-- Pagination -->
-                    <div class="clearfix"></div>
-                    <div class="pagination-container margin-top-40 margin-bottom-10">
-                        <nav class="pagination">
-                            <ul>
-                                <li><a href="{{ url("#") }}" class="ripple-effect current-page">1</a></li>
-                                <li><a href="{{ url("#") }}" class="ripple-effect">2</a></li>
-                                <li class="pagination-arrow"><a href="{{ url("#") }}" class="ripple-effect"><i
-                                            class="icon-material-outline-keyboard-arrow-right"></i></a></li>
-                            </ul>
-                        </nav>
-                    </div>
                     <div class="clearfix"></div>
                     <!-- Pagination / End -->
 
@@ -160,48 +99,26 @@
                     <div class="profile-overview">
                         <div class="overview-item">
                             <strong>${{$user->profile->hourly_rate ?? 0}}</strong><span>Hourly Rate</span></div>
-                        <div class="overview-item"><strong>53</strong><span>Jobs Done</span></div>
-                        <div class="overview-item"><strong>22</strong><span>Rehired</span></div>
+                        <div class="overview-item"><strong>{{$user->count_jobs_done}}</strong><span>Jobs Done</span></div>
+{{--                        <div class="overview-item"><strong>22</strong><span>Rehired</span></div>--}}
                     </div>
 
                     <!-- Button -->
                     <a href="{{ url("#small-dialog") }}" class="apply-now-button popup-with-zoom-anim margin-bottom-50">Make
                         an Offer <i class="icon-material-outline-arrow-right-alt"></i></a>
 
-                    <!-- Freelancer Indicators -->
+                    <!-- Widget -->
                     <div class="sidebar-widget">
-                        <div class="freelancer-indicators">
+                        <h3>Skills</h3>
+                        <div class="task-tags">
+                            @forelse($user->profile->skills_arr as $skill)
+                                <span>{{$skill}}</span>
 
-                            <!-- Indicator -->
-                            <div class="indicator">
-                                <strong>88%</strong>
-                                <div class="indicator-bar" data-indicator-percentage="88"><span></span></div>
-                                <span>Job Success</span>
-                            </div>
-
-                            <!-- Indicator -->
-                            <div class="indicator">
-                                <strong>100%</strong>
-                                <div class="indicator-bar" data-indicator-percentage="100"><span></span></div>
-                                <span>Recommendation</span>
-                            </div>
-
-                            <!-- Indicator -->
-                            <div class="indicator">
-                                <strong>90%</strong>
-                                <div class="indicator-bar" data-indicator-percentage="90"><span></span></div>
-                                <span>On Time</span>
-                            </div>
-
-                            <!-- Indicator -->
-                            <div class="indicator">
-                                <strong>80%</strong>
-                                <div class="indicator-bar" data-indicator-percentage="80"><span></span></div>
-                                <span>On Budget</span>
-                            </div>
+                            @empty
+                                <p></p>
+                            @endforelse
                         </div>
                     </div>
-
                     <!-- Widget -->
                     <div class="sidebar-widget">
                         <h3>Social Profiles</h3>
@@ -220,18 +137,6 @@
                         </div>
                     </div>
 
-                    <!-- Widget -->
-                    <div class="sidebar-widget">
-                        <h3>Skills</h3>
-                        <div class="task-tags">
-                            @forelse($user->profile->skills_arr as $skill)
-                                <span>{{$skill}}</span>
-
-                            @empty
-                                <p></p>
-                            @endforelse
-                        </div>
-                    </div>
 
                     <!-- Widget -->
                     <div class="sidebar-widget">

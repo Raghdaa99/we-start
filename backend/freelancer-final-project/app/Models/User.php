@@ -71,6 +71,18 @@ class User extends Authenticatable
         return $this->hasMany(Proposal::class, 'freelancer_id', 'id');
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'freelancer_id', 'id');
+    }
+
+
+    public function getRateAttribute()
+    {
+
+        return round($this->reviews->avg('star'), 2);
+    }
+
     protected function imageUrl(): Attribute
     {
         return Attribute::make(
@@ -84,6 +96,15 @@ class User extends Authenticatable
             },
         );
     }
+
+//    public function getWalletAttribute()
+//    {
+//
+////        return number_format($this->wallet, 2, '.', '');
+//        return $this->wallet;
+//
+//
+//    }
 
     public function proposalsProject()
     {
@@ -99,6 +120,11 @@ class User extends Authenticatable
     public function contracts()
     {
         return $this->hasMany(Contract::class, 'freelancer_id', 'id');
+    }
+
+    public function getCountJobsDoneAttribute()
+    {
+        return $this->contracts()->where('status', 'completed')->count();
     }
 
     public function contractedProjects()

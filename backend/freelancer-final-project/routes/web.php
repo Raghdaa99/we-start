@@ -8,6 +8,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Route;
@@ -84,7 +85,13 @@ Route::prefix('/user')->name('user.')->middleware('auth')->group(function () {
     Route::post('/messages/store',[MessageController::class,'storeMessages'])->name('sendMessage');
 
 
-    Route::get('/reviews',[MessageController::class,'getReviews'])->name('reviews');
+    Route::get('/reviews',[ReviewController::class,'getReviews'])->name('reviews.index');
+    Route::get('/reviews/{id}',[ReviewController::class,'getReview'])->name('reviews.show');
+    Route::post('/reviews/store',[ReviewController::class,'storeReviews'])->name('reviews.store');
+    Route::put('/reviews/update/{id}',[ReviewController::class,'updateReviews'])->name('reviews.update');
+//    Route::delete('/reviews/delete',[ReviewController::class,'destroyReviews'])->name('reviews.delete');
+
+
     Route::get('/checkout',[PaymentController::class,'checkout'])->name('checkout');
     Route::post('/stripe',[PaymentController::class,'postPaymentStripe'])->name('payment');
     Route::get('/success-payment',[PaymentController::class,'getSuccessPayment'])->name('success.payment');

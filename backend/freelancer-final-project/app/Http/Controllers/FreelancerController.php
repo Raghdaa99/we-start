@@ -64,7 +64,7 @@ class FreelancerController extends Controller
     {
         $proposal = Proposal::findOrFail($id);
 
-        $proposal->load('freelancer');
+        $proposal->load('freelancer','contract');
         return response()->json($proposal, \Illuminate\Http\Response::HTTP_OK);
     }
 

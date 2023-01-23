@@ -70,7 +70,8 @@
 
                                             <!-- Rating -->
                                             <div class="freelancer-rating">
-                                                <div class="star-rating" data-rating="5.0"></div>
+                                                <div class="star-rating" data-rating="{{$proposal->freelancer->rate}}"></div>
+
                                             </div>
 
                                             <!-- Bid Details -->
@@ -93,6 +94,11 @@
                                                        class="popup-with-zoom-anim button  ripple-effect"><i
                                                             class="icon-feather-edit"></i> Status Contract
                                                     </a>
+                                                    <a href="#small-dialog-4" onclick="performReviews({{$proposal->id}})"
+                                                       class="popup-with-zoom-anim button"
+                                                       style="background-color: #febe42">
+                                                        <i class="icon-material-outline-thumb-up"></i> Leave a
+                                                        Review</a>
                                                 @else
                                                     <a onclick="accept_offer({{$proposal->id}})"
                                                        href="{{ url("#small-dialog-1") }}"
@@ -261,7 +267,8 @@
                     </form>
 
                     <!-- Button -->
-                    <button class="button full-width button-sliding-icon ripple-effect" type="submit" form="change_contract">
+                    <button class="button full-width button-sliding-icon ripple-effect" type="submit"
+                            form="change_contract">
                         Send <i class="icon-material-outline-arrow-right-alt"></i></button>
 
                 </div>
@@ -270,6 +277,69 @@
         </div>
     </div>
 
+    <!-- Leave a Review for Freelancer Popup
+================================================== -->
+    <div id="small-dialog-4" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+        <!--Tabs -->
+        <div class="sign-in-form">
+
+            <ul class="popup-tabs-nav">
+            </ul>
+
+            <div class="popup-tabs-container">
+
+                <!-- Tab -->
+                <div class="popup-tab-content" id="tab2">
+
+                    <!-- Welcome Text -->
+                    <div class="welcome-text">
+                        <h3>Leave a Review</h3>
+                        <span>Rate <a href="#" id="username"></a> for the project <a
+                                href="#" id="name_project"></a> </span>
+                    </div>
+
+                    <!-- Form -->
+                    <form method="post" id="leave-review-form" action="{{route('user.reviews.store')}}">
+                        @csrf
+
+
+                        <input type="hidden" name="freelancer_id">
+                        <input type="hidden" name="project_id" value="{{$project->id}}">
+                        <input type="hidden" name="contract_id">
+                        <div class="feedback-yes-no">
+                            <strong>Your Rating</strong>
+                            <div class="leave-rating">
+                                <input type="radio" name="star" id="rating-radio-1" value="5" required>
+                                <label for="rating-radio-1" class="icon-material-outline-star"></label>
+                                <input type="radio" name="star" id="rating-radio-2" value="4" required>
+                                <label for="rating-radio-2" class="icon-material-outline-star"></label>
+                                <input type="radio" name="star" id="rating-radio-3" value="3" required>
+                                <label for="rating-radio-3" class="icon-material-outline-star"></label>
+                                <input type="radio" name="star" id="rating-radio-4" value="2" required>
+                                <label for="rating-radio-4" class="icon-material-outline-star"></label>
+                                <input type="radio" name="star" id="rating-radio-5" value="1" required>
+                                <label for="rating-radio-5" class="icon-material-outline-star"></label>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <textarea class="with-border" placeholder="Comment" name="comment" id="comment" cols="7"
+                                  required></textarea>
+
+                    </form>
+
+                <!-- Button -->
+                    <button class="button full-width button-sliding-icon ripple-effect" type="submit"
+                            form="leave-review-form">Leave a Review <i
+                            class="icon-material-outline-arrow-right-alt"></i></button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Leave a Review Popup / End -->
 @endsection
 
 @section('scripts')
@@ -428,6 +498,44 @@
             // });
         }
     </script>
+    <script>
+        function performReviews(id) {
+            let url = `http://127.0.0.1:8000/user/proposal/${id}`;
+            $.get({
+                url,
+                success: (res) => {
 
+                    $('#username').text(res.freelancer.name)
+                    $('#name_project').text('{{$project->title}}')
+                    $('#leave-review-form input[name=freelancer_id]').val(res.freelancer_id)
+                    $('#leave-review-form input[name=contract_id]').val(res.contract.id)
+                }
+            })
+        }
+
+        $('#leave-review-form').on('submit', function (e) {
+            e.preventDefault();
+            let data = new FormData(this);
+            let url = $('#leave-review-form').attr('action');
+            $.ajax({
+                type: 'post',
+                url,
+                data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: (res) => {
+                    console.log(res.message);
+                    toastr.success(res.message);
+                    window.location.reload();
+                },
+                error: (error) => {
+                    toastr.error(error.responseJSON.message);
+                    console.log(error.responseJSON.message);
+                }
+
+            })
+        });
+    </script>
 
 @endsection

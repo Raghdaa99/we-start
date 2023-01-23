@@ -20,11 +20,7 @@ class MessageController extends Controller
         return view('frontsite.dashboard-user.messages');
     }
 
-    public function getReviews()
-    {
 
-        return view('frontsite.dashboard-user.reviews');
-    }
 
     public function getUsers()
     {

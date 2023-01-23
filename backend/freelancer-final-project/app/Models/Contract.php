@@ -34,4 +34,9 @@ class Contract extends Model
         return $this->belongsTo(Proposal::class, 'proposal_id', 'id')
             ->withDefault();
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

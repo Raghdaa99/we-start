@@ -33,7 +33,7 @@
                 <div class="fun-fact" data-fun-fact-color="#36bd78">
                     <div class="fun-fact-text">
                         <span>Total Balance</span>
-                        <h4>{{Auth::user()->wallet}}</h4>
+                        <h4>{{number_format(Auth::user()->wallet, 2, '.', '')}}</h4>
                     </div>
                     <div class="fun-fact-icon" style="background-color: rgba(54, 189, 120, 0.07);"><i class="icon-material-outline-money" style="color: rgb(54, 189, 120);"></i></div>
                 </div>
