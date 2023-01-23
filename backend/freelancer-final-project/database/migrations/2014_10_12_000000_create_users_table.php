@@ -23,6 +23,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->enum('type', ['freelancer', 'client'])->default('client');
             $table->string('channels')->nullable();
+            $table->double('wallet')->nullable();
             $table->timestamps();
         });
     }

@@ -14,6 +14,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $appends = [
+        'image_url'
+    ];
     /**
      * The attributes that are mass assignable.
      *
@@ -46,35 +49,35 @@ class User extends Authenticatable
     ];
 
 
-     // User has one freelaner profile
-     public function profile()
-     {
-         return $this->hasOne(Profile::class, 'user_id', 'id')
-             ->withDefault();
-     }
+    // User has one freelaner profile
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_id', 'id')
+            ->withDefault();
+    }
 
-     public function projects()
-     {
-         return $this->hasMany(Project::class, 'user_id', 'id');
-     }
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'user_id', 'id');
+    }
 
-     public function image()
-     {
-         return $this->morphOne(Image::class, 'imageable');
-     }
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 
     public function proposals()
     {
         return $this->hasMany(Proposal::class, 'freelancer_id', 'id');
     }
 
-     protected function imageUrl(): Attribute
+    protected function imageUrl(): Attribute
     {
         return Attribute::make(
-            get: function() {
-                $src = 'https://ui-avatars.com/api/?background=random&name='.$this->name;
-                if($this->image) {
-                    $src = asset('storage/'.$this->image->path);
+            get: function () {
+                $src = 'https://ui-avatars.com/api/?background=random&name=' . $this->name;
+                if ($this->image) {
+                    $src = asset('storage/' . $this->image->path);
                 }
 
                 return $src;
@@ -82,14 +85,15 @@ class User extends Authenticatable
         );
     }
 
-    public function proposalsProject(){
+    public function proposalsProject()
+    {
 
-         return $this->belongsToMany(Project::class,
-             Proposal::class,
-             'freelancer_id',
-             'project_id')->withPivot([
-             'description', 'cost', 'duration', 'duration_unit', 'status',
-         ]);
+        return $this->belongsToMany(Project::class,
+            Proposal::class,
+            'freelancer_id',
+            'project_id')->withPivot([
+            'description', 'cost', 'duration', 'duration_unit', 'status',
+        ]);
     }
 
     public function contracts()

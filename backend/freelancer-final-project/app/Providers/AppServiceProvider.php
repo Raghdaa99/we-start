@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
-
+use PayPalCheckoutSdk\Core\PayPalHttpClient;
+use PayPalCheckoutSdk\Core\SandboxEnvironment;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,7 +15,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('paypal.client',function (){
+            $clientId = config('services.paypal.client_id');
+            $clientSecret = config('services.paypal.secret');
+
+            $environment = new SandboxEnvironment($clientId, $clientSecret);
+            return new PayPalHttpClient($environment);
+        });
     }
 
     /**
@@ -24,5 +31,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Paginator::useBootstrap();    }
+        Paginator::useBootstrap();
+    }
 }

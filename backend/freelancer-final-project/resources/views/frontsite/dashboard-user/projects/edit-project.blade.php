@@ -57,7 +57,20 @@
                                     </select>
                                 </div>
                             </div>
-
+                            <div class="col-xl-4">
+                                <div class="submit-field">
+                                    <h5>Status</h5>
+                                    <select class="selectpicker with-border" data-size="7" title="Select Status"
+                                            name="status">
+                                        <option @selected($project->status ==
+                                            'open') value="open">Open</option>
+                                        <option @selected($project->status ==
+                                            'in-progress') value="in-progress">in-progress</option>
+                                        <option @selected($project->status ==
+                                            'closed') value="closed">Closed</option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-xl-6">
                                 <div class="submit-field">
                                     <h5>What is your estimated budget?</h5>
@@ -151,7 +164,10 @@
                                                         <a href="{{ asset('storage/' . $file->path) }}">
                                                             {{ $file->name. substr($file->path,strpos($file->path ,'.'),strlen($file->path)) }}
                                                         </a>
-                                                        <button  type="button" onclick="deleteImage('{{$file->id}}',this)" class="button gray ripple-effect ico" title="Remove" data-tippy-placement="top">
+                                                        <button type="button"
+                                                                onclick="deleteImage('{{$file->id}}',this)"
+                                                                class="button gray ripple-effect ico" title="Remove"
+                                                                data-tippy-placement="top">
                                                             <i class="icon-feather-trash-2"></i>
                                                         </button>
                                                     </div>
@@ -169,7 +185,7 @@
 
             <div class="col-xl-12">
                 <button type="submit" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i>
-                   Edit a Task
+                    Edit a Task
                 </button>
             </div>
 
@@ -259,7 +275,7 @@
         function performDelete(id, reference) {
             $.ajax({
                 type: "delete",
-                url:`/user/image/${id}`,
+                url: `/user/image/${id}`,
                 success: function (res) {
                     reference.closest('li').remove();
                     toastr.success(res.message);
@@ -269,7 +285,6 @@
                     toastr.error(error.responseJSON);
                 },
             });
-
 
 
         }

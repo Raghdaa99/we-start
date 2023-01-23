@@ -83,10 +83,16 @@
                                         {{--                                            href="{{ url("#small-dialog-1") }}"--}}
                                         <!-- Buttons -->
                                             <div class="buttons-to-right always-visible margin-top-25 margin-bottom-0">
-{{--                                                @dump($proposal->contract->exists)--}}
+                                                {{--                                                @dump($proposal->contract->exists)--}}
                                                 @if($proposal->contract->exists)
                                                     <a class="margin-bottom-25"> <i
                                                             class="icon-material-outline-check"></i>Accepted </a>
+
+                                                    <a href="{{ url("#small-dialog-3") }}"
+                                                       onclick="changeStatusContract({{$proposal->contract->id}})"
+                                                       class="popup-with-zoom-anim button  ripple-effect"><i
+                                                            class="icon-feather-edit"></i> Status Contract
+                                                    </a>
                                                 @else
                                                     <a onclick="accept_offer({{$proposal->id}})"
                                                        href="{{ url("#small-dialog-1") }}"
@@ -96,10 +102,11 @@
                                                 @endif
 
                                                 <a href="{{ url("#small-dialog-2") }}"
+                                                   onclick="sendMessage({{$proposal->id}})"
                                                    class="popup-with-zoom-anim button dark ripple-effect"><i
                                                         class="icon-feather-mail"></i> Send Message
                                                 </a>
-                                                <a  onclick="deletePropsal({{$proposal->id}},this)"
+                                                <a onclick="deletePropsal({{$proposal->id}},this)"
                                                    class="button gray ripple-effect ico"
                                                    title="Remove Bid" data-tippy-placement="top"><i
                                                         class="icon-feather-trash-2"></i></a>
@@ -195,13 +202,15 @@
 
                     <!-- Welcome Text -->
                     <div class="welcome-text">
-                        <h3>Direct Message To David</h3>
+                        <h3>Direct Message To <span id="name_user"></span></h3>
                     </div>
 
                     <!-- Form -->
-                    <form method="post" id="send-pm">
-                        <textarea name="textarea" cols="10" placeholder="Message" class="with-border"
+                    <form method="post" id="send-pm" action="{{route('user.sendMessage')}}">
+                        @csrf
+                        <textarea name="body" cols="10" placeholder="Message" class="with-border"
                                   required></textarea>
+                        <input type="hidden" name="recipient_id" id="recipient_id">
                     </form>
 
                     <!-- Button -->
@@ -214,6 +223,52 @@
         </div>
     </div>
     <!-- Send Direct Message Popup / End -->
+
+    <div id="small-dialog-3" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+        <!--Tabs -->
+        <div class="sign-in-form">
+
+            <ul class="popup-tabs-nav">
+                <li><a href="{{ url("#tab2") }}">Status Contract</a></li>
+            </ul>
+
+            <div class="popup-tabs-container">
+
+                <!-- Tab -->
+                <div class="popup-tab-content" id="tab2">
+
+                    <!-- Welcome Text -->
+                    <div class="welcome-text">
+                        <h3>IF Freelancer complete this Project, You can change the status of contract
+                            to Complete , then it will convert money to account this freelancer</h3>
+                    </div>
+
+                    <!-- Form -->
+                    <form method="post" id="change_contract" action="{{route('user.contract.update')}}">
+                        @csrf
+                        <div class="col-xl-4">
+                            <div class="submit-field">
+                                <h5>Status</h5>
+                                <select class="selectpicker with-border" data-size="7" title="Select Status"
+                                        name="status">
+                                    <option value="active">active</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="terminated">Terminated</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Button -->
+                    <button class="button full-width button-sliding-icon ripple-effect" type="submit" form="change_contract">
+                        Send <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 @endsection
 
@@ -245,8 +300,10 @@
                 contentType: false,
                 processData: false,
                 success: (res) => {
-                    console.log(res);
-                    toastr.success(res.data.message);
+                    console.log(res.message);
+                    toastr.success(res.message);
+                    window.location.reload();
+                    // document.getElementById('small-dialog-1').style.display = 'none';
                 },
                 error: (error) => {
                     toastr.error(error.responseJSON.message);
@@ -259,11 +316,78 @@
         // $('#cost span').val('555')
     </script>
     <script>
+        function sendMessage(id) {
+            let url = `http://127.0.0.1:8000/user/proposal/${id}`;
+            $.get({
+                url,
+                success: (res) => {
+                    console.log('raaaa');
+                    $('#name_user').text(res.freelancer.name)
+                    $('#send-pm input[name=recipient_id]').val(res.freelancer_id)
+                }
+            })
+        }
+
+        $('#send-pm').on('submit', function (e) {
+            e.preventDefault();
+            let data = new FormData(this);
+            let url = $('#send-pm').attr('action');
+            $.ajax({
+                type: 'post',
+                url,
+                data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: (res) => {
+                    console.log(res.message);
+                    toastr.success(res.message);
+                    window.location.reload();
+                },
+                error: (error) => {
+                    toastr.error(error.responseJSON.message);
+                    console.log(error.responseJSON.message);
+                }
+
+            })
+        })
+    </script>
+    <script>
+        function changeStatusContract(id) {
+            $('#change_contract').on('submit', function (e) {
+                e.preventDefault();
+                let data = new FormData(this);
+                data.append('contract_id', id);
+                let url = $('#change_contract').attr('action');
+                $.ajax({
+                    type: 'post',
+                    url,
+                    data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: (res) => {
+                        console.log(res.message);
+                        toastr.success(res.message);
+                        window.location.reload();
+                        // document.getElementById('small-dialog-1').style.display = 'none';
+                    },
+                    error: (error) => {
+                        toastr.error(error.responseJSON.message);
+                        console.log(error.responseJSON.message);
+                    }
+
+                })
+            })
+        }
+    </script>
+    <script>
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+
         function deletePropsal(id, reference) {
             Swal.fire({
                 title: 'Are you sure?',

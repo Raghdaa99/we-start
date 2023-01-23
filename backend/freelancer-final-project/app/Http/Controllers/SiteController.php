@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\Category;
 use App\Models\Project;
 use App\Models\Proposal;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 
 class SiteController extends Controller
 {
@@ -16,8 +19,8 @@ class SiteController extends Controller
         return view('frontsite.index', [
             'categories' => Category::withCount('projects')->get(),
             'projects' => Project::with('tags')->get(),
-            'count_projects'=>Project::count(),
-            'count_freelancers'=>User::where('type','freelancer')->count(),
+            'count_projects' => Project::count(),
+            'count_freelancers' => User::where('type', 'freelancer')->count(),
         ]);
     }
 
@@ -87,4 +90,15 @@ class SiteController extends Controller
     {
         return view('frontsite.contact');
     }
+
+    public function sendEmailContact(Request $request)
+    {
+
+
+        //send To Admin
+        Mail::to('roroter999@gmail.com')->queue(new ContactMail($request->all()));
+
+        return response()->json(['message' => 'success Send', Response::HTTP_OK]);
+    }
+
 }

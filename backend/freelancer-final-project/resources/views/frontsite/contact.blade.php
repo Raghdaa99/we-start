@@ -67,7 +67,8 @@
                 <section id="contact" class="margin-bottom-60">
                     <h3 class="headline margin-top-15 margin-bottom-35">Any questions? Feel free to contact us!</h3>
 
-                    <form method="post" name="contactform" id="contactform" autocomplete="on">
+                    <form action="{{route('send-contact')}}" method="post" name="contactform" id="contactform" autocomplete="on" >
+                        @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="input-with-icon-left">
@@ -112,4 +113,39 @@
     <script src="{{ asset("/assets/frontsite/js/infobox.min.js") }}"></script>
     <script src="{{ asset("/assets/frontsite/js/markerclusterer.js") }}"></script>
     <script src="{{ asset("/assets/frontsite/js/maps.js") }}"></script>
+
+    <script >
+
+        $('#contactform').submit(function(e) {
+            e.preventDefault();
+
+            var form = $(this);
+            let data = new FormData(this);
+            let url = form.attr('action');
+            $.ajax({
+                type: "post",
+                url,
+                data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(res) {
+                    console.log(res.message)
+                    toastr.success(res.message);
+                    resetForm();
+                },
+                error: function(data) {
+                    let errors = data.responseJSON;
+                    toastr.error(errors.message);
+                    console.log(errors)
+                },
+            });
+
+        });
+        function resetForm()
+        {
+            $('#contactform')[0].reset();
+        }
+    </script>
+
 @endsection

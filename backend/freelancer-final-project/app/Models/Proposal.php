@@ -14,6 +14,7 @@ class Proposal extends Model
         'duration', 'duration_unit', 'status',
     ];
 
+
     public function freelancer()
     {
         return $this->belongsTo(User::class, 'freelancer_id', 'id');

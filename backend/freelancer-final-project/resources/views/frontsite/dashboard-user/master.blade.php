@@ -45,8 +45,8 @@
                                 <li class=" {{active('user.messages')}}"><a href="{{ route("user.messages") }}"><i
                                             class="icon-material-outline-question-answer"></i> Messages <span
                                             class="nav-tag">2</span></a></li>
-                                <li><a href="{{ url("dashboard-bookmarks.html") }}"><i
-                                            class="icon-material-outline-star-border"></i> Bookmarks</a></li>
+                                <li class=" {{active('user.checkout')}}"><a href="{{ route("user.checkout") }}"><i
+                                            class="icon-material-outline-account-balance"></i> Checkout</a></li>
                                 <li class=" {{active('user.reviews')}}"><a href="{{ route("user.reviews") }}"><i
                                             class="icon-material-outline-rate-review"></i> Reviews</a></li>
                             </ul>

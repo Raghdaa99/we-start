@@ -23,10 +23,10 @@
                                     </li>
 
                                     @if($project->user->profile->country)
-                                    <li><img class="flag"
-                                             src="{{ asset('/assets/frontsite/images/flags/'.$project->user->profile->country.'.svg') }}"
-                                             alt=""> {{Symfony\Component\Intl\Countries::getName($project->user->profile->country)}}
-                                    </li>
+                                        <li><img class="flag"
+                                                 src="{{ asset('/assets/frontsite/images/flags/'.$project->user->profile->country.'.svg') }}"
+                                                 alt=""> {{Symfony\Component\Intl\Countries::getName($project->user->profile->country)}}
+                                        </li>
                                     @endif
 
                                     @if($project->user->email_verified_at)
@@ -59,11 +59,17 @@
 
             <!-- Content -->
             <div class="col-xl-8 col-lg-8 content-right-offset">
-                @if (session('msg'))
-                    <div class="alert alert-{{ session('type') }}">
-                        {{ session('msg') }}
-                    </div>
-            @endif
+            {{--                @if (session('msg'))--}}
+            {{--                    --}}{{--                    <div class="alert alert-{{ session('type') }}">--}}
+            {{--                    --}}{{--                        {{ session('msg') }}--}}
+            {{--                    --}}{{--                    </div>--}}
+            {{--                    @if (session('type') == 'success')--}}
+            {{--                        <div class="countdown green margin-bottom-35"> {{ session('msg') }}</div>--}}
+            {{--                    @else--}}
+            {{--                        <div class="countdown red margin-bottom-35"> {{ session('msg') }}</div>--}}
+            {{--                    @endif--}}
+            {{--                @endif--}}
+
             <!-- Description -->
                 <div class="single-page-section">
                     <h3 class="margin-bottom-25">Project Description</h3>
@@ -102,7 +108,7 @@
                     <div class="boxed-list-headline">
                         <h3><i class="icon-material-outline-group"></i> Freelancers Bidding</h3>
                     </div>
-                    <ul class="boxed-list-ul">
+                    <ul class="boxed-list-ul" id="proposal_wrapper">
                         @forelse($project->proposals as $proposal)
                             <li>
                                 <div class="bid">
@@ -160,7 +166,8 @@
                     <div class="countdown green margin-bottom-35">{{$project->created_at->diffForHumans()}}</div>
 
 
-                    <form action="{{route('proposal.store')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('proposal.store')}}" method="post" enctype="multipart/form-data"
+                          id="send_proposal">
                         @csrf
                         <div class="sidebar-widget">
                             <div class="bidding-widget">
@@ -277,4 +284,84 @@
     <!-- Spacer -->
     <div class="margin-top-15"></div>
     <!-- Spacer / End-->
+@endsection
+
+@section('scripts')
+    <script>
+        let proposals = document.querySelector('#proposal_wrapper');
+        $('#send_proposal').submit(function (e) {
+            e.preventDefault();
+
+            var form = $(this);
+            let data = new FormData(this);
+            let url = form.attr('action');
+
+            $.ajax({
+                type: "post",
+                url,
+                data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    console.log(res.proposal)
+                    toastr.success(res.message);
+                    let proposal = res.proposal;
+                    let url = '/u/' + proposal.freelancer.name + '/' + proposal.freelancer.id;
+                    resetForm();
+                    let item = `<li>
+                                <div class="bid">
+                                    <!-- Avatar -->
+                                    <div class="bids-avatar">
+                                        <div class="freelancer-avatar">
+                                            <div class="verified-badge"></div>
+                                            <a href="${url}"><img
+                                                    src="${proposal.freelancer.image_url}"
+                                                    alt=""></a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Content -->
+                                    <div class="bids-content">
+                                        <!-- Name -->
+                                        <div class="freelancer-name">
+                                            <h4>
+                                                <a href="${url}">{{ $proposal->freelancer->name }}
+                    <img
+                        class="flag"
+                        src="${'/assets/frontsite/images/flags/' + proposal.freelancer.profile.country + '.svg'}"
+                                                        alt=""
+                                                        title="United Kingdom" data-tippy-placement="top"></a>
+                                            </h4>
+                                            <span class="star-rating" data-rating="4.9"></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bid -->
+                                    <div class="bids-bid">
+                                        <div class="bid-rate">
+                                            <div class="rate">$${proposal.cost}</div>
+                                            <span>in ${proposal.duration} ${proposal.duration_unit}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <p style="margin-left: 15%">${proposal.description}</p>
+                            </li>`
+                    proposals.innerHTML += item
+
+                },
+                error: function (data) {
+                    let errors = data.responseJSON;
+                    toastr.error(errors.message);
+                    console.log(errors)
+                },
+            });
+
+        });
+
+        function resetForm() {
+            $('#send_proposal')[0].reset();
+        }
+    </script>
 @endsection
