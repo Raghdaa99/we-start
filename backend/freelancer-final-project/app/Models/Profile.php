@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Profile extends Model
 {
     use HasFactory;
+
     protected $primaryKey = 'user_id';
 
     protected $fillable = [
@@ -27,6 +28,16 @@ class Profile extends Model
 
     public function getSkillsArrAttribute()
     {
-        return explode(', ',$this->skills);
+        return explode(', ', $this->skills);
+    }
+
+    public function getProjectsSkillsAttribute()
+    {
+
+        $skills_freelancer = $this->getSkillsArrAttribute();
+//        dd($skills_freelancer);
+        return $projects = Project::whereHas('tags', function ($query) use ($skills_freelancer) {
+            $query->whereIn('name', $skills_freelancer);
+        })->latest()->get();
     }
 }

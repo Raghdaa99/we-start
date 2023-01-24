@@ -14,9 +14,9 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>150</h3>
+                            <h3>{{$count_projects}}</h3>
 
-                            <p>New Orders</p>
+                            <p>Jobs Posted</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-bag"></i>
@@ -29,9 +29,11 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
+                            <h3>
+                                {{number_format(Auth::user()->wallet, 2, '.', '')}}<sup style="font-size: 20px">$</sup>
+                            </h3>
 
-                            <p>Bounce Rate</p>
+                            <p>Total Balance</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -44,9 +46,9 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3>{{$freelancers->count()}}</h3>
 
-                            <p>User Registrations</p>
+                            <p>Freelancers</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -59,9 +61,9 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>65</h3>
+                            <h3>{{$count_clients}}</h3>
 
-                            <p>Unique Visitors</p>
+                            <p>Visitors</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>
@@ -71,6 +73,53 @@
                 </div>
                 <!-- ./col -->
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <h3>All Freelancers</h3>
+                    <a class="btn btn-primary" href="{{route('admin.send.email')}}">Send Email
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                    @if (session('msg'))
+                        <div class="alert alert-success">
+                            {{ session('msg') }}
+                        </div>
+                    @endif
+                    <div>
+                        <table class="table table-bordered ">
+                            <thead>
+                            <tr class="bg-dark text-white">
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Title</th>
+                                <th>Image</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            @forelse ($freelancers as $freelancer)
+                                <tr>
+                                    <td>{{ $freelancer->id }}</td>
+                                    <td>{{ $freelancer->name }}</td>
+                                    <td>{{ $freelancer->email }}</td>
+                                    <td>{{ $freelancer->profile->title }}</td>
+
+                                    <td><img width="70" src="{{$freelancer->image_url}}" alt="">
+                                    </td>
+
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5">No Data</td>
+                                </tr>
+                            @endforelse
+                            </tbody>
+                        </table>
+                        {{ $freelancers->links() }}
+                    </div>
+                </div>
+            </div>
+
         </div><!-- /.container-fluid -->
     </section>
 @endsection

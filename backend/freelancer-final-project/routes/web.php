@@ -47,7 +47,8 @@ Route::group([
     'middleware' => ['auth:admin'],
 ], function () {
 
-    Route::get('/', [AdminController::class, 'index'])->name('admin.home');
+    Route::get('/', [AdminController::class, 'index'])->name('home');
+    Route::get('/send-email', [AdminController::class, 'sendEmail'])->name('send.email');
 
     Route::resource('categories', CategoryController::class);
 });

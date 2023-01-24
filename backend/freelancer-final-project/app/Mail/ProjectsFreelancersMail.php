@@ -13,14 +13,16 @@ class ProjectsFreelancersMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $freelancer;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($freelancer)
     {
-
+        $this->freelancer = $freelancer;
     }
 
     /**
@@ -43,7 +45,7 @@ class ProjectsFreelancersMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'mails.projects-freelancer-mail',
         );
     }
 
